@@ -23,7 +23,7 @@ export default function Header() {
         <a
           href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
           target="_blank"
-          className="font-bold hover:underline"
+          className="font-bold hover:underline text-amber-400"
           rel="noreferrer"
         >
           Supabase
@@ -32,7 +32,7 @@ export default function Header() {
         <a
           href="https://nextjs.org/"
           target="_blank"
-          className="font-bold hover:underline"
+          className="font-bold hover:underline text-amber-400"
           rel="noreferrer"
         >
           Next.js
