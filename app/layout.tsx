@@ -61,7 +61,7 @@ export default function RootLayout({
                   <Link href="cart">
                     <ShoppingCart className="size-5 stroke-gold-200 transition-colors hover:stroke-gold-300" />
                   </Link>
-                  <Link href="profile">
+                  <Link href="sign-in">
                     <User className="size-5 stroke-gold-200 transition-colors hover:stroke-gold-300" />
                   </Link>
                 </div>

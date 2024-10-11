@@ -3,7 +3,7 @@ import HeroImage from "@/public/hero-image.png";
 
 export default async function Index() {
   return (
-    <div className="mt-40 box-border h-[calc(100vh-5rem)]">
+    <div className="box-border h-[calc(100vh-5rem)] pt-40">
       <h1 className="z-10 text-center text-8xl opacity-100 [text-shadow:_0_4px_8px_rgb(0_0_0/_0.8)]">
         Luxury Home Goods
       </h1>

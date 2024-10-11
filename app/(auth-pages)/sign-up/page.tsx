@@ -17,22 +17,35 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
 
   return (
     <>
-      <form className="mx-auto flex min-w-64 max-w-64 flex-col">
-        <h1 className="text-2xl font-medium">Sign up</h1>
-        <p className="text text-sm text-foreground">
+      <form className="my-16 flex min-w-64 max-w-64 flex-col">
+        <h1 className="text-3xl font-bold">Sign up</h1>
+        <p className="font-sans text-sm text-stone-500">
           Already have an account?{" "}
-          <Link className="font-medium text-primary underline" href="/sign-in">
+          <Link
+            className="font-medium text-stone-500 underline"
+            href="/sign-in"
+          >
             Sign in
           </Link>
         </p>
         <div className="mt-8 flex flex-col gap-2 [&>input]:mb-3">
-          <Label htmlFor="email">Email</Label>
-          <Input name="email" placeholder="you@example.com" required />
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="email" className="text-lg">
+            Email
+          </Label>
+          <Input
+            name="email"
+            placeholder="you@example.com"
+            className="font-sans placeholder:text-stone-500 focus-visible:ring-gold-500"
+            required
+          />
+          <Label htmlFor="password" className="text-lg">
+            Password
+          </Label>
           <Input
             type="password"
             name="password"
             placeholder="Your password"
+            className="font-sans placeholder:text-stone-500 focus-visible:ring-gold-500"
             minLength={6}
             required
           />
@@ -42,7 +55,6 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
           <FormMessage message={searchParams} />
         </div>
       </form>
-      <SmtpMessage />
     </>
   );
 }
