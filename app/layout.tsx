@@ -7,6 +7,7 @@ import { Josefin_Slab } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
+import { ShoppingCart, User } from "lucide-react";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -35,25 +36,33 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange
         >
           <main className="min-h-screen flex flex-col items-center">
-            <div className="flex-1 w-full flex flex-col gap-20 items-center">
+            <div className="flex-1 w-full flex flex-col items-center">
               <nav className="w-full flex items-center space-x-8 justify-center border-b border-b-foreground/10 h-20 fixed bg-background z-50">
                 <Link
-                  href={"/decor"}
+                  href="/decor"
                   className="uppercase text-lg text-gold-200 hover:text-gold-300 transition-colors"
                 >
                   Decor
                 </Link>
-                <Link href={"/"} className="text-gold-500 text-4xl">
+                <Link href="/" className="text-gold-500 text-4xl">
                   MODRN
                 </Link>
                 <Link
-                  href={"/office"}
+                  href="/office"
                   className="uppercase text-lg text-gold-200 hover:text-gold-300 transition-colors"
                 >
                   Office
                 </Link>
+                <div className="flex space-x-5 absolute right-10">
+                  <Link href="cart">
+                    <ShoppingCart className="stroke-gold-200 hover:stroke-gold-300 transition-colors size-5" />
+                  </Link>
+                  <Link href="profile">
+                    <User className="stroke-gold-200 hover:stroke-gold-300 transition-colors size-5" />
+                  </Link>
+                </div>
               </nav>
-              <div className="flex flex-col gap-20 p-5 mt-24">{children}</div>
+              <div className="mt-20 box-border">{children}</div>
 
               <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
                 <p>
