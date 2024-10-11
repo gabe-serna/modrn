@@ -7,7 +7,7 @@ interface Props {
 
 export default function Dashboard({ children }: Props) {
   return (
-    <section className="flex min-h-[calc(100vh_-_theme(spacing.16))] w-[calc(100vw-12px)] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
+    <div className="flex min-h-[calc(100vh_-_theme(spacing.16))] w-[calc(100vw-12px)] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
       <div className="mx-auto grid w-full gap-1">
         <h1 className="text-3xl font-bold">Your Account</h1>
         <p className="font-sans text-stone-400">
@@ -18,6 +18,6 @@ export default function Dashboard({ children }: Props) {
         <SettingsNav />
         {children}
       </div>
-    </section>
+    </div>
   );
 }

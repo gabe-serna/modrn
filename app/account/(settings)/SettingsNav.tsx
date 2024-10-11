@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 const SettingsNav = () => {
   const pathname = usePathname();
-  console.log("pathname", pathname);
 
   const links = [
     {
