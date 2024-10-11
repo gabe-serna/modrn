@@ -9,7 +9,7 @@ export default function ConnectSupabaseSteps() {
           <a
             href="https://app.supabase.com/project/_/settings/api"
             target="_blank"
-            className="font-bold hover:underline text-foreground/80"
+            className="font-bold text-foreground/80 hover:underline"
             rel="noreferrer"
           >
             database.new
@@ -21,18 +21,18 @@ export default function ConnectSupabaseSteps() {
       <TutorialStep title="Declare environment variables">
         <p>
           Rename the{" "}
-          <span className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground border">
+          <span className="relative rounded border bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground">
             .env.example
           </span>{" "}
           file in your Next.js app to{" "}
-          <span className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground border">
+          <span className="relative rounded border bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground">
             .env.local
           </span>{" "}
           and populate with values from{" "}
           <a
             href="https://app.supabase.com/project/_/settings/api"
             target="_blank"
-            className="font-bold hover:underline text-foreground/80"
+            className="font-bold text-foreground/80 hover:underline"
             rel="noreferrer"
           >
             your Supabase project's API Settings
@@ -44,7 +44,7 @@ export default function ConnectSupabaseSteps() {
       <TutorialStep title="Restart your Next.js development server">
         <p>
           You may need to quit your Next.js development server and run{" "}
-          <span className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground border">
+          <span className="relative rounded border bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground">
             npm run dev
           </span>{" "}
           again to load the new environment variables.

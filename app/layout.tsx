@@ -16,16 +16,20 @@ const defaultUrl = process.env.VERCEL_URL
 const josefinSlab = Josefin_Slab({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-josefin-slab"
+  variable: "--font-josefin-slab",
 });
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Modrn",
-  description: "The Premiere Store for Modern Living"
+  description: "The Premiere Store for Modern Living",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={josefinSlab.variable} suppressHydrationWarning>
       <body className="bg-background text-foreground">
@@ -35,36 +39,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col items-center">
-            <div className="flex-1 w-full flex flex-col items-center">
-              <nav className="w-full flex items-center space-x-8 justify-center border-b border-b-foreground/10 h-20 fixed bg-background z-50">
+          <main className="flex min-h-screen flex-col items-center">
+            <div className="flex w-full flex-1 flex-col items-center">
+              <nav className="fixed z-50 flex h-20 w-full items-center justify-center space-x-8 border-b border-b-foreground/10 bg-background">
                 <Link
                   href="/decor"
-                  className="uppercase text-lg text-gold-200 hover:text-gold-300 transition-colors"
+                  className="text-lg uppercase text-gold-200 transition-colors hover:text-gold-300"
                 >
                   Decor
                 </Link>
-                <Link href="/" className="text-gold-500 text-4xl">
+                <Link href="/" className="text-4xl text-gold-500">
                   MODRN
                 </Link>
                 <Link
                   href="/office"
-                  className="uppercase text-lg text-gold-200 hover:text-gold-300 transition-colors"
+                  className="text-lg uppercase text-gold-200 transition-colors hover:text-gold-300"
                 >
                   Office
                 </Link>
-                <div className="flex space-x-5 absolute right-10">
+                <div className="absolute right-10 flex space-x-5">
                   <Link href="cart">
-                    <ShoppingCart className="stroke-gold-200 hover:stroke-gold-300 transition-colors size-5" />
+                    <ShoppingCart className="size-5 stroke-gold-200 transition-colors hover:stroke-gold-300" />
                   </Link>
                   <Link href="profile">
-                    <User className="stroke-gold-200 hover:stroke-gold-300 transition-colors size-5" />
+                    <User className="size-5 stroke-gold-200 transition-colors hover:stroke-gold-300" />
                   </Link>
                 </div>
               </nav>
               <div className="mt-20 box-border">{children}</div>
 
-              <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
+              <footer className="mx-auto flex w-full items-center justify-center gap-8 border-t py-16 text-center text-xs">
                 <p>
                   Powered by{" "}
                   <a

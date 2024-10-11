@@ -52,7 +52,7 @@ export default function FetchDataSteps() {
           Head over to the{" "}
           <a
             href="https://supabase.com/dashboard/project/_/editor"
-            className="font-bold hover:underline text-foreground/80"
+            className="font-bold text-foreground/80 hover:underline"
             target="_blank"
             rel="noreferrer"
           >
@@ -63,7 +63,7 @@ export default function FetchDataSteps() {
           following into the{" "}
           <a
             href="https://supabase.com/dashboard/project/_/sql/new"
-            className="font-bold hover:underline text-foreground/80"
+            className="font-bold text-foreground/80 hover:underline"
             target="_blank"
             rel="noreferrer"
           >
@@ -78,7 +78,7 @@ export default function FetchDataSteps() {
         <p>
           To create a Supabase client and query data from an Async Server
           Component, create a new page.tsx file at{" "}
-          <span className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground border">
+          <span className="relative rounded border bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground">
             /app/notes/page.tsx
           </span>{" "}
           and add the following.
