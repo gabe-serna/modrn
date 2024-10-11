@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { supabaseAdmin } from "@/utils/supabase/server";
 import { ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 
@@ -15,10 +15,9 @@ import {
 import SignOutButton from "./SignOutButton";
 
 const NavBar = async () => {
-  const supabase = createClient();
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabaseAdmin.auth.getUser();
 
   return (
     <nav className="fixed z-50 flex h-20 w-full items-center justify-center space-x-8 border-b border-b-foreground/10 bg-background">
