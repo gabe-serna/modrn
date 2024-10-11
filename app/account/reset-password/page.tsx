@@ -12,7 +12,7 @@ export default async function ResetPassword({
   return (
     <form className="my-16 flex min-w-64 max-w-64 flex-col">
       <h1 className="text-3xl font-bold">Reset Password</h1>
-      <p className="font-sans text-sm text-stone-500">
+      <p className="font-sans text-sm text-stone-400">
         Please enter your new password below.
       </p>
       <div className="flex flex-col gap-2 [&>input]:mb-3">
@@ -23,7 +23,7 @@ export default async function ResetPassword({
           type="password"
           name="password"
           placeholder="New password"
-          className="font-sans placeholder:text-stone-500 focus-visible:ring-gold-500"
+          className="font-sans placeholder:text-stone-400 focus-visible:ring-gold-500"
           minLength={6}
           required
         />
@@ -34,7 +34,7 @@ export default async function ResetPassword({
           type="password"
           name="confirmPassword"
           placeholder="Confirm password"
-          className="font-sans placeholder:text-stone-500 focus-visible:ring-gold-500"
+          className="font-sans placeholder:text-stone-400 focus-visible:ring-gold-500"
           minLength={6}
           required
         />

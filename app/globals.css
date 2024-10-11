@@ -6,6 +6,15 @@ body {
   font-family: var(--font-josefin-slab), serif;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #423113;
+  border-radius: 3px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

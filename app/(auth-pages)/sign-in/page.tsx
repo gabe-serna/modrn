@@ -9,9 +9,9 @@ export default function Login({ searchParams }: { searchParams: Message }) {
   return (
     <form className="my-16 flex min-w-64 flex-1 flex-col">
       <h1 className="text-3xl font-bold">Sign in</h1>
-      <p className="font-sans text-sm text-stone-500">
+      <p className="font-sans text-sm text-stone-400">
         Don't have an account?{" "}
-        <Link className="font-medium text-stone-500 underline" href="/sign-up">
+        <Link className="font-medium text-stone-400 underline" href="/sign-up">
           Sign up
         </Link>
       </p>
@@ -22,7 +22,7 @@ export default function Login({ searchParams }: { searchParams: Message }) {
         <Input
           name="email"
           placeholder="you@example.com"
-          className="font-sans placeholder:text-stone-500 focus-visible:ring-gold-500"
+          className="font-sans placeholder:text-stone-400 focus-visible:ring-gold-500"
           required
         />
         <div className="flex items-center justify-between">
@@ -30,7 +30,7 @@ export default function Login({ searchParams }: { searchParams: Message }) {
             Password
           </Label>
           <Link
-            className="font-sans text-xs text-stone-500 underline"
+            className="font-sans text-xs text-stone-400 underline"
             href="/forgot-password"
           >
             Forgot Password?
@@ -40,7 +40,7 @@ export default function Login({ searchParams }: { searchParams: Message }) {
           type="password"
           name="password"
           placeholder="Your password"
-          className="font-sans placeholder:text-stone-500 focus-visible:ring-gold-500"
+          className="font-sans placeholder:text-stone-400 focus-visible:ring-gold-500"
           required
         />
         <SubmitButton pendingText="Signing In..." formAction={signInAction}>
