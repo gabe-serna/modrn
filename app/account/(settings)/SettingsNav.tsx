@@ -15,10 +15,6 @@ const SettingsNav = () => {
       href: "/account/billing",
       label: "Billing",
     },
-    {
-      href: "/account/advanced",
-      label: "Advanced",
-    },
   ];
   return (
     <nav className="grid gap-4 text-sm text-muted-foreground">
