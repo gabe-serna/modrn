@@ -1,31 +1,7 @@
-"use client";
-
 import Image from "next/image";
 import HeroImage from "@/public/hero-image.png";
-import { useContext, useEffect } from "react";
-import { createClient } from "@/utils/supabase/client";
-import { UserContext } from "@/components/UserContext";
 
-export default function Index() {
-  const { user, setUser } = useContext(UserContext);
-  const supabase = createClient();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser();
-      if (error) {
-        console.error(error);
-      } else if (!user) {
-        setUser(null);
-      } else {
-        setUser(user);
-      }
-    };
-    fetchUser();
-  }, []);
+export default async function Index() {
   return (
     <div className="box-border h-[calc(100vh-5rem)] pt-40">
       <h1 className="z-10 text-center text-8xl opacity-100 [text-shadow:_0_4px_8px_rgb(0_0_0/_0.8)]">

@@ -31,7 +31,7 @@ export default function Login({ searchParams }: { searchParams: Message }) {
           </Label>
           <Link
             className="font-sans text-xs text-stone-400 underline"
-            href="/account/reset-password"
+            href="/forgot-password"
           >
             Forgot Password?
           </Link>
