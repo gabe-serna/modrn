@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Josefin_Slab } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import UserProvider from "@/components/UserContext";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -35,13 +36,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="flex min-h-screen flex-col items-center">
-            <div className="flex w-full flex-1 flex-col items-center">
-              <NavBar />
-              <div className="mt-20 box-border">{children}</div>
-              <Footer />
-            </div>
-          </main>
+          <UserProvider>
+            <main className="flex min-h-screen flex-col items-center">
+              <div className="flex w-full flex-1 flex-col items-center">
+                <NavBar />
+                <div className="mt-20 box-border">{children}</div>
+                <Footer />
+              </div>
+            </main>
+          </UserProvider>
         </ThemeProvider>
         <Toaster />
       </body>

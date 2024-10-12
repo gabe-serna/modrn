@@ -1,7 +1,6 @@
-"use server";
+"use client";
 
-import { supabaseAdmin } from "@/utils/supabase/server";
-import { ShoppingCart, User } from "lucide-react";
+import { ShoppingCart, UserIcon } from "lucide-react";
 import Link from "next/link";
 
 import {
@@ -13,12 +12,11 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import SignOutButton from "./SignOutButton";
+import { useContext } from "react";
+import { UserContext } from "@/components/UserContext";
 
-const NavBar = async () => {
-  const {
-    data: { user },
-  } = await supabaseAdmin.auth.getUser();
-  console.log("user", user);
+const NavBar = () => {
+  const { user } = useContext(UserContext);
 
   return (
     <nav className="fixed z-50 flex h-20 w-full items-center justify-center space-x-8 border-b border-b-foreground/10 bg-background">
@@ -40,7 +38,7 @@ const NavBar = async () => {
       <div className="absolute right-10 flex items-center justify-center space-x-5">
         {user && (
           <h2 className="font-sans text-sm italic text-stone-500">
-            Welcome, {user.email}
+            Welcome, {user?.email}
           </h2>
         )}
         <Link href="/cart">
@@ -51,7 +49,7 @@ const NavBar = async () => {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="group">
-                  <User className="size-5 stroke-gold-200 transition-colors group-hover:stroke-gold-400" />
+                  <UserIcon className="size-5 stroke-gold-200 transition-colors group-hover:stroke-gold-400" />
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="flex flex-col text-nowrap px-8 py-6">
                   <h1 className="select-none text-lg font-bold">
@@ -75,7 +73,7 @@ const NavBar = async () => {
           </NavigationMenu>
         ) : (
           <Link href="/sign-in">
-            <User className="size-5 stroke-gold-200 transition-colors hover:stroke-gold-300" />
+            <UserIcon className="size-5 stroke-gold-200 transition-colors hover:stroke-gold-300" />
           </Link>
         )}
       </div>
