@@ -1,5 +1,5 @@
 import ItemPreview from "@/components/ItemPreview";
-import { supabaseAdmin } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import CheckoutForm from "../CheckoutForm";
 
@@ -11,7 +11,8 @@ export default async function Product({ params }: Props) {
   let { item } = params;
   item = item.replace(/%20/g, " ");
 
-  const { data, error } = await supabaseAdmin
+  const supabase = createClient();
+  const { data, error } = await supabase
     .from("products")
     .select("id, name, description, price, amount_in_stock, image_url")
     .eq("name", item)

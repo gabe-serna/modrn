@@ -1,8 +1,9 @@
-import { supabaseAdmin } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 import ItemPreview from "@/components/ItemPreview";
 
 const Office = async () => {
-  const { data, error } = await supabaseAdmin
+  const supabase = createClient();
+  const { data, error } = await supabase
     .from("products")
     .select("name, price, image_url")
     .eq("category", "office");
