@@ -3,13 +3,13 @@ import ItemPreview from "@/components/ItemPreview";
 
 const Office = async () => {
   const { data, error } = await supabaseAdmin
-    .from("office")
-    .select("name, price, image_url");
+    .from("products")
+    .select("name, price, image_url")
+    .eq("category", "office");
 
   if (error || !data) {
     console.error(error);
   }
-  console.log(data);
 
   return (
     <div className="grid grid-cols-3 gap-4">

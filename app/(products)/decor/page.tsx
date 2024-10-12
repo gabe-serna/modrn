@@ -3,8 +3,9 @@ import ItemPreview from "@/components/ItemPreview";
 
 const Office = async () => {
   const { data, error } = await supabaseAdmin
-    .from("decor")
-    .select("name, price, image_url");
+    .from("products")
+    .select("name, price, image_url")
+    .eq("category", "decor");
 
   if (error || !data) {
     console.error(error);
