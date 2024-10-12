@@ -18,6 +18,7 @@ const NavBar = async () => {
   const {
     data: { user },
   } = await supabaseAdmin.auth.getUser();
+  console.log("user", user);
 
   return (
     <nav className="fixed z-50 flex h-20 w-full items-center justify-center space-x-8 border-b border-b-foreground/10 bg-background">

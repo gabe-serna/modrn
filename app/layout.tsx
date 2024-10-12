@@ -1,7 +1,7 @@
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { Josefin_Slab } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
+import { Toaster } from "@/components/ui/toaster";
+import { Josefin_Slab } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 
@@ -43,6 +43,7 @@ export default function RootLayout({
             </div>
           </main>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
