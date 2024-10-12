@@ -12,9 +12,10 @@ import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/hooks/use-toast";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { CartContext, CartItem } from "@/components/CartProvider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +38,7 @@ const formSchema = z.object({
 const CheckoutForm = ({ id }: Props) => {
   const { toast } = useToast();
   const router = useRouter();
+  const { cart, setCart } = useContext(CartContext);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,24 +55,50 @@ const CheckoutForm = ({ id }: Props) => {
       error,
     } = await supabase.auth.getUser();
 
-    if (!user || user?.aud !== "authenticated") {
-      router.push("/sign-in?redirect=/cart");
-      //add redirect to checkout page after login
-      return;
-    } else if (error) {
+    if (error) {
       console.error(error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "An error occurred. Please try again later.",
-      });
+      // toast({
+      //   variant: "destructive",
+      //   title: "Error",
+      //   description: "An error occurred. Please try again later.",
+      // });
+      // return;
+    }
+    if (!user) {
+      const { data, error: err } = await supabase
+        .from("products")
+        .select("name, price, image_url, amount_in_stock, category")
+        .eq("id", id)
+        .single();
+      if (err) {
+        console.error(err);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description:
+            "An error occurred while adding the product to the cart.",
+        });
+        return;
+      }
+      const product = {
+        name: data.name as string,
+        price: data.price as number,
+        image_url: data.image_url as string,
+        amount_in_stock: data.amount_in_stock as number,
+        category: data.category as string,
+      };
+      setCart([
+        ...cart,
+        { id: id, quantity: values.quantity, products: product },
+      ]);
+      router.push("/cart");
       return;
     }
-
-    const { data, error: err } = await supabase
+    const { error: err } = await supabase
       .from("cart_items")
-      .insert([{ user_id: user.id, product_id: id, quantity: values.quantity }])
-      .select();
+      .insert([
+        { user_id: user.id, product_id: id, quantity: values.quantity },
+      ]);
 
     if (err) {
       console.error(err);
