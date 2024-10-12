@@ -31,14 +31,14 @@ const Billing = () => {
     <section className="grid w-3/4 gap-6">
       <header className="border-b border-gold-800 pb-8">
         <h1 className="text-2xl font-bold">Billing</h1>
-        <p className="font-sans text-stone-400">
+        <p className="font-sans text-muted-foreground">
           Manage your billing information
         </p>
       </header>
       <main className="grid gap-6">
         <figure className="mt-2">
           <figcaption className="text-xl font-bold">Card Details</figcaption>
-          <p className="font-sans text-sm text-stone-400">*********</p>
+          <p className="font-sans text-sm text-muted-foreground">*********</p>
         </figure>
       </main>
     </section>

@@ -7,7 +7,7 @@ export default async function Index() {
       <h1 className="z-10 text-center text-8xl opacity-100 [text-shadow:_0_4px_8px_rgb(0_0_0/_0.8)]">
         Luxury Home Goods
       </h1>
-      <h2 className="mt-4 text-center font-sans text-3xl italic text-stone-400 [text-shadow:_0_4px_12px_rgb(0_0_0/_0.8)]">
+      <h2 className="mt-4 text-center font-sans text-3xl italic text-muted-foreground [text-shadow:_0_4px_12px_rgb(0_0_0/_0.8)]">
         Crafting Luxury, Redefining Lifestyle
       </h2>
       <Image

@@ -31,7 +31,7 @@ const Profile = () => {
     <section className="grid w-3/4 gap-6">
       <header className="border-b border-gold-800 pb-8">
         <h1 className="text-2xl font-bold">Profile</h1>
-        <p className="font-sans text-stone-400">
+        <p className="font-sans text-muted-foreground">
           This is your user information
         </p>
       </header>
@@ -39,7 +39,9 @@ const Profile = () => {
         <figure>
           <figcaption className="text-xl font-bold">Email</figcaption>
           {info.email ? (
-            <p className="font-sans text-sm text-stone-400">{info.email}</p>
+            <p className="font-sans text-sm text-muted-foreground">
+              {info.email}
+            </p>
           ) : (
             <Loading />
           )}
@@ -51,14 +53,16 @@ const Profile = () => {
               No Phone Number Added
             </p>
           ) : info.phone ? (
-            <p className="font-sans text-sm text-stone-400">{info.phone}</p>
+            <p className="font-sans text-sm text-muted-foreground">
+              {info.phone}
+            </p>
           ) : (
             <Loading />
           )}
         </figure>
         <figure className="mt-2">
           <figcaption className="text-xl font-bold">Password</figcaption>
-          <p className="font-sans text-sm text-stone-400">*********</p>
+          <p className="font-sans text-sm text-muted-foreground">*********</p>
           <Link href="/account/reset-password" className="text-gold-500">
             Forgot Password?
           </Link>

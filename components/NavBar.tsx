@@ -60,12 +60,12 @@ const NavBar = async () => {
                   <SignOutButton />
                   <hr className="mt-1.5 border-gold-800" />
                   <Link href="/account" legacyBehavior passHref>
-                    <NavigationMenuLink className="mt-2 font-sans text-sm text-stone-400 transition-colors hover:text-stone-500">
+                    <NavigationMenuLink className="mt-2 font-sans text-sm text-muted-foreground transition-colors hover:text-stone-500">
                       Account
                     </NavigationMenuLink>
                   </Link>
                   <Link href="/account/orders" legacyBehavior passHref>
-                    <NavigationMenuLink className="mt-0.5 font-sans text-sm text-stone-400 transition-colors hover:text-stone-500">
+                    <NavigationMenuLink className="mt-0.5 font-sans text-sm text-muted-foreground transition-colors hover:text-stone-500">
                       Orders
                     </NavigationMenuLink>
                   </Link>

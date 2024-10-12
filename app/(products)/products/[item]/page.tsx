@@ -35,7 +35,7 @@ export default async function Product({ params }: Props) {
           <div className="inline h-min max-w-[clamp(40ch,_35%,_65ch)]">
             <h1 className="text-3xl font-bold">{data.name}</h1>
             <p className="text-xl text-gold-400">${data.price}</p>
-            <p className="mt-4 min-w-[45ch] max-w-[75ch] font-sans text-sm text-stone-400">
+            <p className="mt-4 min-w-[45ch] max-w-[75ch] font-sans text-sm text-muted-foreground">
               {data.description}
             </p>
             {data.amount_in_stock <= 50 ? (
