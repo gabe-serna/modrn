@@ -10,7 +10,7 @@ export default async function ResetPassword({
   searchParams: Message;
 }) {
   return (
-    <form className="my-16 flex min-w-64 max-w-64 flex-col">
+    <form className="my-20 flex min-w-64 max-w-64 flex-col">
       <h1 className="text-3xl font-bold">Reset Password</h1>
       <p className="font-sans text-sm text-muted-foreground">
         Please enter your new password below.
@@ -23,7 +23,6 @@ export default async function ResetPassword({
           type="password"
           name="password"
           placeholder="New password"
-          className="font-sans placeholder:text-muted-foreground focus-visible:ring-gold-500"
           minLength={6}
           required
         />
@@ -34,7 +33,6 @@ export default async function ResetPassword({
           type="password"
           name="confirmPassword"
           placeholder="Confirm password"
-          className="font-sans placeholder:text-muted-foreground focus-visible:ring-gold-500"
           minLength={6}
           required
         />

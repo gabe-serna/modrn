@@ -16,7 +16,7 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
 
   return (
     <>
-      <form className="my-16 flex min-w-64 max-w-64 flex-col">
+      <form className="my-20 flex min-w-64 max-w-64 flex-col">
         <h1 className="text-3xl font-bold">Sign up</h1>
         <p className="font-sans text-sm text-muted-foreground">
           Already have an account?{" "}
@@ -34,7 +34,7 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
           <Input
             name="email"
             placeholder="you@example.com"
-            className="font-sans placeholder:text-muted-foreground focus-visible:ring-gold-500"
+            className="font-sans"
             required
           />
           <Label htmlFor="password" className="text-lg">
@@ -44,7 +44,7 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
             type="password"
             name="password"
             placeholder="Your password"
-            className="font-sans placeholder:text-muted-foreground focus-visible:ring-gold-500"
+            className="font-sans"
             minLength={6}
             required
           />
