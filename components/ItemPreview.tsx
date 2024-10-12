@@ -13,7 +13,7 @@ const ItemPreview = ({ image, title, price }: Props) => {
     <Card className="w-[350px]">
       {/* make the entire card a link */}
       <Link href={`/products/${title}`}>
-        <Image src={image} alt={title} width={640} height={640}></Image>
+        <Image src={image} alt={title} width={350} height={350}></Image>
         <CardContent className="flex flex-col items-start justify-center">
           <CardTitle>{title}</CardTitle>
           <CardDescription>${price}</CardDescription>

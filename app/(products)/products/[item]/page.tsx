@@ -1,5 +1,7 @@
 import ItemPreview from "@/components/ItemPreview";
 import { supabaseAdmin } from "@/utils/supabase/server";
+import Image from "next/image";
+import CheckoutForm from "../CheckoutForm";
 
 interface Props {
   params: { item: string };
@@ -11,7 +13,7 @@ export default async function Product({ params }: Props) {
 
   const { data, error } = await supabaseAdmin
     .from("products")
-    .select("name, description, price, amount_in_stock, image_url")
+    .select("id, name, description, price, amount_in_stock, image_url")
     .eq("name", item)
     .single();
 
@@ -19,14 +21,33 @@ export default async function Product({ params }: Props) {
     console.error(error);
   }
   return (
-    <div>
+    <div className="flex justify-around p-20">
       {data && (
-        <ItemPreview
-          key={data.name}
-          title={data.name}
-          image={data.image_url}
-          price={data.price}
-        />
+        <>
+          <Image
+            src={data.image_url}
+            alt={data.name}
+            width={450}
+            height={450}
+          />
+          <div className="inline h-min max-w-[clamp(40ch,_35%,_65ch)]">
+            <h1 className="text-3xl font-bold">{data.name}</h1>
+            <p className="text-xl text-gold-400">${data.price}</p>
+            <p className="mt-4 min-w-[45ch] max-w-[75ch] font-sans text-sm text-stone-400">
+              {data.description}
+            </p>
+            {data.amount_in_stock <= 50 ? (
+              <p className="mt-2 inline-block font-sans text-sm italic text-gold-600">
+                <b>{data.amount_in_stock}</b> left in stock
+              </p>
+            ) : (
+              <p className="mt-2 inline-block font-sans text-sm italic text-gold-600">
+                In stock
+              </p>
+            )}
+            <CheckoutForm id={data.id} />
+          </div>
+        </>
       )}
     </div>
   );
