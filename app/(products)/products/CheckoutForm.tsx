@@ -80,11 +80,11 @@ const CheckoutForm = ({ id }: Props) => {
         description: "An error occurred while adding the product to the cart.",
       });
     } else {
-      toast({
-        title: "Success",
-        description: "Product added to cart.",
-      });
-      // router.push("/cart");
+      // toast({
+      //   title: "Success",
+      //   description: "Product added to cart.",
+      // });
+      router.push("/cart");
     }
   }
 
@@ -108,6 +108,9 @@ const CheckoutForm = ({ id }: Props) => {
                   min={1}
                   {...field}
                   className="font-sans"
+                  onChange={(e) => {
+                    field.onChange(parseInt(e.target.value));
+                  }}
                 />
               </FormControl>
               <FormMessage />
