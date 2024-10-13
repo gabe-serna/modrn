@@ -14,6 +14,7 @@ import { Gem } from "lucide-react";
 import { CartContext } from "@/components/CartProvider";
 import { useContext } from "react";
 import { Input } from "@/components/ui/input";
+import CartQuantity from "./CartQuantity";
 
 export default function CartTableClient() {
   const { cart, setCart } = useContext(CartContext);
@@ -61,21 +62,7 @@ export default function CartTableClient() {
                   ${item.products.price}
                 </TableCell>
                 <TableCell className="text-bold text-xl">
-                  <Input
-                    type="number"
-                    min={1}
-                    defaultValue={item.quantity}
-                    onChange={(e) => {
-                      const newQuantity = parseInt(e.target.value);
-                      setCart(
-                        cart.map((cartItem) =>
-                          cartItem.id === item.id
-                            ? { ...cartItem, quantity: newQuantity }
-                            : cartItem,
-                        ),
-                      );
-                    }}
-                  ></Input>
+                  <CartQuantity item={item} />
                 </TableCell>
                 <TableCell>
                   <TrashCartItem id={item.id} />
