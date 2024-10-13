@@ -26,6 +26,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { AuthSessionMissingError } from "@supabase/supabase-js";
 
 interface Props {
   id: number;
@@ -55,16 +56,17 @@ const CheckoutForm = ({ id }: Props) => {
       error,
     } = await supabase.auth.getUser();
 
-    if (error) {
+    if (error && !(error instanceof AuthSessionMissingError)) {
       console.error(error);
-      // toast({
-      //   variant: "destructive",
-      //   title: "Error",
-      //   description: "An error occurred. Please try again later.",
-      // });
-      // return;
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "An error occurred. Please try again later.",
+      });
+      return;
     }
     if (!user) {
+      // Add to Cart for Anonymous User
       const { data, error: err } = await supabase
         .from("products")
         .select("name, price, image_url, amount_in_stock, category")
@@ -94,6 +96,8 @@ const CheckoutForm = ({ id }: Props) => {
       router.push("/cart");
       return;
     }
+
+    //Add to Cart for Authenticated User
     const { error: err } = await supabase
       .from("cart_items")
       .insert([
@@ -108,10 +112,6 @@ const CheckoutForm = ({ id }: Props) => {
         description: "An error occurred while adding the product to the cart.",
       });
     } else {
-      // toast({
-      //   title: "Success",
-      //   description: "Product added to cart.",
-      // });
       router.push("/cart");
     }
   }

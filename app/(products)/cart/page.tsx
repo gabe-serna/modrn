@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import CartTableServer from "./CartTableServer";
 import CartTableClient from "./CartTableClient";
+import { AuthSessionMissingError } from "@supabase/supabase-js";
 
 export default async function Cart() {
   const supabase = createClient();
@@ -8,7 +9,7 @@ export default async function Cart() {
     data: { user },
     error,
   } = await supabase.auth.getUser();
-  if (error) {
+  if (error && !(error instanceof AuthSessionMissingError)) {
     console.error(error);
   }
 

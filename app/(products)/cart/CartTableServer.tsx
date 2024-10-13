@@ -12,7 +12,6 @@ import Image from "next/image";
 import TrashCartItem from "./TrashCartItem";
 import { Gem } from "lucide-react";
 import ShopNowButton from "./ShopNowButton";
-import { CartItem } from "@/components/CartProvider";
 
 export default async function CartTableServer() {
   const supabase = createClient();
