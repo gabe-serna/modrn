@@ -13,8 +13,9 @@ import ShopNowButton from "./ShopNowButton";
 import { Gem } from "lucide-react";
 import { CartContext } from "@/components/CartProvider";
 import { useContext } from "react";
+import { Input } from "@/components/ui/input";
 
-export default function CartTableServer() {
+export default function CartTableClient() {
   const { cart, setCart } = useContext(CartContext);
 
   if (cart.length > 0) {
@@ -60,7 +61,21 @@ export default function CartTableServer() {
                   ${item.products.price}
                 </TableCell>
                 <TableCell className="text-bold text-xl">
-                  {item.quantity}
+                  <Input
+                    type="number"
+                    min={1}
+                    defaultValue={item.quantity}
+                    onChange={(e) => {
+                      const newQuantity = parseInt(e.target.value);
+                      setCart(
+                        cart.map((cartItem) =>
+                          cartItem.id === item.id
+                            ? { ...cartItem, quantity: newQuantity }
+                            : cartItem,
+                        ),
+                      );
+                    }}
+                  ></Input>
                 </TableCell>
                 <TableCell>
                   <TrashCartItem id={item.id} />
@@ -72,7 +87,13 @@ export default function CartTableServer() {
         <hr className="border-gold-800" />
         <div className="w-full py-8 text-right text-xl">
           Subtotal:{" "}
-          <b>${cart.reduce((acc, item) => acc + item.products.price, 0)}</b>
+          <b>
+            $
+            {cart.reduce(
+              (total, item) => total + item.products.price * item.quantity,
+              0,
+            )}
+          </b>
         </div>
       </div>
     );
