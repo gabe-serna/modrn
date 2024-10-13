@@ -13,12 +13,11 @@ import ShopNowButton from "./ShopNowButton";
 import { Gem } from "lucide-react";
 import { CartContext } from "@/components/CartProvider";
 import { useContext } from "react";
-import { Input } from "@/components/ui/input";
 import CartQuantity from "./CartQuantity";
 import CheckoutButton from "./CheckoutButton";
 
 export default function CartTableClient() {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
 
   if (cart.length > 0) {
     return (

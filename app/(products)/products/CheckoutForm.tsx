@@ -69,7 +69,9 @@ const CheckoutForm = ({ id }: Props) => {
       // Add to Cart for Anonymous User
       const { data, error: err } = await supabase
         .from("products")
-        .select("name, price, image_url, amount_in_stock, category")
+        .select(
+          "name, price, image_url, amount_in_stock, category, stripe_price_id",
+        )
         .eq("id", id)
         .single();
       if (err) {
@@ -88,6 +90,7 @@ const CheckoutForm = ({ id }: Props) => {
         image_url: data.image_url as string,
         amount_in_stock: data.amount_in_stock as number,
         category: data.category as string,
+        stripe_price_id: data.stripe_price_id as string,
       };
       setCart([
         ...cart,

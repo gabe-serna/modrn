@@ -133,12 +133,10 @@ export const createCheckoutSession = async (cartItems: CartItem[]) => {
   const origin: string = headers().get("origin") as string;
   const checkoutSession = await stripe.checkout.sessions.create({
     mode: "payment",
-    line_items: [
-      {
-        price: "price_1Q86ZYF4zz7XCw30h2mO8P05",
-        quantity: 1,
-      },
-    ],
+    line_items: cartItems.map((item) => ({
+      price: item.products.stripe_price_id,
+      quantity: item.quantity,
+    })),
     success_url: `${origin}/success`,
     cancel_url: `${origin}/cart`,
   });

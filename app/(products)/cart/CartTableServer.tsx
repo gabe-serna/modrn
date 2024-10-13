@@ -29,7 +29,7 @@ export default async function CartTableServer() {
   const { data: rawData, error: err } = await supabase
     .from("cart_items")
     .select(
-      "id, quantity, products!product_id(name, price, image_url, amount_in_stock, category)",
+      "id, quantity, products!product_id(name, price, image_url, amount_in_stock, category, stripe_price_id)",
     )
     .eq("user_id", user.id);
   if (err) {
@@ -48,6 +48,7 @@ export default async function CartTableServer() {
         image_url: string;
         amount_in_stock: number;
         category: string;
+        stripe_price_id: string;
       },
     };
   });

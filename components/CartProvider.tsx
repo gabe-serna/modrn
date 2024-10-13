@@ -8,6 +8,7 @@ interface Product {
   image_url: string;
   amount_in_stock: number;
   category: string;
+  stripe_price_id: string;
 }
 
 export interface CartItem {
