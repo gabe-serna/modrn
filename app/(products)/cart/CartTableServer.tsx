@@ -13,6 +13,7 @@ import TrashCartItem from "./TrashCartItem";
 import { Gem } from "lucide-react";
 import ShopNowButton from "./ShopNowButton";
 import CartQuantity from "./CartQuantity";
+import CheckoutButton from "./CheckoutButton";
 
 export default async function CartTableServer() {
   const supabase = createClient();
@@ -106,14 +107,17 @@ export default async function CartTableServer() {
         </Table>
         <hr className="border-gold-800" />
         <div className="w-full py-8 text-right text-xl">
-          Subtotal:{" "}
-          <b>
-            $
-            {data.reduce(
-              (total, item) => total + item.products.price * item.quantity,
-              0,
-            )}
-          </b>
+          <div>
+            Subtotal:{" "}
+            <b>
+              $
+              {data.reduce(
+                (total, item) => total + item.products.price * item.quantity,
+                0,
+              )}
+            </b>
+          </div>
+          <CheckoutButton data={data} />
         </div>
       </div>
     );

@@ -4,6 +4,8 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { CartItem } from "@/components/CartProvider";
+import { stripe } from "@/utils/stripe/server";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -125,4 +127,24 @@ export const signOutAction = async () => {
   const supabase = createClient();
   await supabase.auth.signOut();
   return redirect("/sign-in");
+};
+
+export const createCheckoutSession = async (cartItems: CartItem[]) => {
+  const origin: string = headers().get("origin") as string;
+  const checkoutSession = await stripe.checkout.sessions.create({
+    mode: "payment",
+    line_items: [
+      {
+        price: "price_1Q86ZYF4zz7XCw30h2mO8P05",
+        quantity: 1,
+      },
+    ],
+    success_url: `${origin}/success`,
+    cancel_url: `${origin}/cart`,
+  });
+
+  return {
+    client_secret: checkoutSession.client_secret,
+    url: checkoutSession.url,
+  };
 };

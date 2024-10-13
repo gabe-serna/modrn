@@ -15,6 +15,7 @@ import { CartContext } from "@/components/CartProvider";
 import { useContext } from "react";
 import { Input } from "@/components/ui/input";
 import CartQuantity from "./CartQuantity";
+import CheckoutButton from "./CheckoutButton";
 
 export default function CartTableClient() {
   const { cart, setCart } = useContext(CartContext);
@@ -73,14 +74,17 @@ export default function CartTableClient() {
         </Table>
         <hr className="border-gold-800" />
         <div className="w-full py-8 text-right text-xl">
-          Subtotal:{" "}
-          <b>
-            $
-            {cart.reduce(
-              (total, item) => total + item.products.price * item.quantity,
-              0,
-            )}
-          </b>
+          <div>
+            Subtotal:{" "}
+            <b>
+              $
+              {cart.reduce(
+                (total, item) => total + item.products.price * item.quantity,
+                0,
+              )}
+            </b>
+          </div>
+          <CheckoutButton data={cart} />
         </div>
       </div>
     );
