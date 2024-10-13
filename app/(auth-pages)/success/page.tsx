@@ -1,5 +1,7 @@
+"use client";
 import { Message } from "@/components/form-message";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Success = ({ searchParams }: { searchParams: Message }) => {
   if ("message" in searchParams) {
@@ -23,8 +25,10 @@ export default Success;
 
 const ShopNowButton = () => {
   return (
-    <Button className="bg-gold-500 text-lg font-bold text-background hover:bg-gold-600">
-      Shop Now
-    </Button>
+    <Link href="/decor">
+      <Button className="bg-gold-500 text-lg font-bold text-background hover:bg-gold-600">
+        Shop Now
+      </Button>
+    </Link>
   );
 };
