@@ -120,7 +120,7 @@ const CheckoutForm = ({ id, maxStock = null }: Props) => {
         description: "An error occurred while adding the product to the cart.",
       });
     } else {
-      router.push("/cart");
+      window.location.href = "/cart";
     }
   }
 
