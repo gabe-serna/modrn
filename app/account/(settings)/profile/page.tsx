@@ -12,9 +12,9 @@ export default async function Profile() {
     return;
   }
 
-  const { data: stripe_customers, error } = await supabase
+  const { data: stripe_customers } = await supabase
     .from("stripe_customers")
-    .select("stripe_customer_id")
+    .select("name, stripe_customer_id")
     .eq("user_id", user.id)
     .single();
 
@@ -26,7 +26,13 @@ export default async function Profile() {
           This is your user information
         </p>
       </header>
-      <main className="grid gap-6">
+      <main className="grid gap-12">
+        <figure>
+          <figcaption className="text-xl font-bold">Name</figcaption>
+          <p className="font-sans text-sm text-muted-foreground">
+            {stripe_customers?.name}
+          </p>
+        </figure>
         <figure>
           <figcaption className="text-xl font-bold">Email</figcaption>
           <p className="font-sans text-sm text-muted-foreground">
@@ -36,12 +42,12 @@ export default async function Profile() {
         <figure className="mt-2">
           <figcaption className="text-xl font-bold">Phone</figcaption>
           {user.phone ? (
-            <p className="font-sans text-sm italic text-stone-500">
-              No Phone Number Added
-            </p>
-          ) : (
             <p className="font-sans text-sm text-muted-foreground">
               {user.phone}
+            </p>
+          ) : (
+            <p className="font-sans text-sm italic text-stone-500">
+              No Phone Number Added
             </p>
           )}
         </figure>
