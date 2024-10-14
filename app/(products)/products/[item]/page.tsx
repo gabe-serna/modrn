@@ -20,6 +20,8 @@ export default async function Product({ params }: Props) {
   if (error || !data) {
     console.error(error);
   }
+
+  const maxStock = data?.available_stock < 10 ? data?.available_stock : null;
   return (
     <div className="flex justify-around p-20">
       {data && (
@@ -37,7 +39,11 @@ export default async function Product({ params }: Props) {
             <p className="mt-4 min-w-[45ch] max-w-[75ch] font-sans text-sm text-muted-foreground">
               {data.description}
             </p>
-            {data.available_stock <= 50 ? (
+            {data.available_stock === 0 ? (
+              <p className="mt-2 inline-block font-sans text-sm italic text-gold-700">
+                <b>Out of stock</b>
+              </p>
+            ) : data.available_stock <= 50 ? (
               <p className="mt-2 inline-block font-sans text-sm italic text-gold-600">
                 <b>{data.available_stock}</b> left in stock
               </p>
@@ -46,7 +52,9 @@ export default async function Product({ params }: Props) {
                 In stock
               </p>
             )}
-            <CheckoutForm id={data.id} />
+            {data.available_stock > 0 && (
+              <CheckoutForm id={data.id} maxStock={maxStock} />
+            )}
           </div>
         </>
       )}

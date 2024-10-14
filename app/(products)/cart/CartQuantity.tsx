@@ -64,6 +64,9 @@ export default function CartQuantity({ item }: { item: CartItem }) {
     <Input
       type="number"
       min={1}
+      max={
+        10 < item.products.available_stock ? 10 : item.products.available_stock
+      }
       defaultValue={item.quantity}
       onChange={handleChange}
     />

@@ -30,13 +30,17 @@ import { AuthSessionMissingError } from "@supabase/supabase-js";
 
 interface Props {
   id: number;
+  maxStock?: number | null;
 }
 
 const formSchema = z.object({
-  quantity: z.number().gte(1, { message: "Quantity must be at least 1" }),
+  quantity: z
+    .number()
+    .gte(1, { message: "Quantity must be at least 1" })
+    .lte(10, { message: "Quantity must be at most 10" }),
 });
 
-const CheckoutForm = ({ id }: Props) => {
+const CheckoutForm = ({ id, maxStock = null }: Props) => {
   const { toast } = useToast();
   const router = useRouter();
   const { cart, setCart } = useContext(CartContext);
@@ -138,6 +142,7 @@ const CheckoutForm = ({ id }: Props) => {
                   placeholder="shadcn"
                   type="number"
                   min={1}
+                  max={maxStock ?? 10}
                   {...field}
                   className="font-sans"
                   onChange={(e) => {

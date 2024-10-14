@@ -57,7 +57,6 @@ export async function POST(req: Request) {
             process.env.SUPABASE_SECRET_KEY!,
           );
 
-          console.log(data);
           const { data: order, error: orderError } = await supabaseAdmin
             .from("orders")
             .insert([
