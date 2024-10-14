@@ -70,7 +70,7 @@ const CheckoutForm = ({ id }: Props) => {
       const { data, error: err } = await supabase
         .from("products")
         .select(
-          "name, price, image_url, available_stock, category, stripe_price_id",
+          "id, name, price, image_url, available_stock, category, stripe_price_id",
         )
         .eq("id", id)
         .single();
@@ -85,6 +85,7 @@ const CheckoutForm = ({ id }: Props) => {
         return;
       }
       const product = {
+        id: data.id as number,
         name: data.name as string,
         price: data.price as number,
         image_url: data.image_url as string,

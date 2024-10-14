@@ -5,6 +5,16 @@ import { NextResponse } from "next/server";
 import { stripe } from "@/utils/stripe/server";
 import { createClient } from "@supabase/supabase-js";
 
+interface LineItem {
+  id: number;
+  quantity: number;
+  stock: number;
+}
+
+interface LineItems {
+  data: LineItem[];
+}
+
 export async function POST(req: Request) {
   let event: Stripe.Event;
 
@@ -40,17 +50,78 @@ export async function POST(req: Request) {
       switch (event.type) {
         case "checkout.session.completed":
           data = event.data.object as Stripe.Checkout.Session;
-          // console.log(`💰 CheckoutSession status: ${data.payment_status}`);
-          // const supabaseAdmin = createClient(
-          //   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-          //   process.env.SUPABASE_SECRET_KEY!,
-          // );
 
-          console.log("🛍 Checkout session: ", data);
-          const lineItems = await stripe.checkout.sessions.listLineItems(
-            data.id,
+          // Create new Order Entry in Supabase
+          const supabaseAdmin = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.SUPABASE_SECRET_KEY!,
           );
-          console.log("🛍 Line items: ", lineItems.data);
+
+          console.log(data);
+          const { data: order, error: orderError } = await supabaseAdmin
+            .from("orders")
+            .insert([
+              {
+                user_id: data.metadata?.user_id || null,
+                email: data.customer_details?.email,
+                amount_total: data.amount_total,
+                amount_subtotal: data.amount_subtotal,
+              },
+            ])
+            .select()
+            .single();
+
+          if (orderError || !order) {
+            console.log("❌ Order creation failed: ", orderError);
+            return NextResponse.json(
+              { message: "Order creation failed" },
+              { status: 500 },
+            );
+          }
+
+          // Add Order Items to Order Entry
+          const lineItems = JSON.parse(
+            data.metadata?.order_items || "",
+          ) as LineItem[];
+          const { error: orderItemsError } = await supabaseAdmin
+            .from("order_items")
+            .insert(
+              lineItems.map((item) => ({
+                order_id: order.id,
+                product_id: item.id,
+                quantity: item.quantity,
+              })),
+            );
+          if (orderItemsError) {
+            console.log("❌ Order items creation failed: ", orderItemsError);
+            return NextResponse.json(
+              { message: "Order items creation failed" },
+              { status: 500 },
+            );
+          }
+
+          // Update Product Stock
+          lineItems.forEach(async (item) => {
+            const newStock = item.stock - item.quantity;
+            const { error: stockError } = await supabaseAdmin
+              .from("products")
+              .update({ available_stock: newStock })
+              .eq("id", item.id);
+            if (stockError) {
+              console.log("❌ Stock update failed: ", stockError);
+            }
+          });
+
+          // Empty Authenticated User Cart
+          if (!data.metadata?.user_id) break;
+
+          const { error: cartError } = await supabaseAdmin
+            .from("cart_items")
+            .delete()
+            .eq("user_id", data.metadata.user_id);
+          if (cartError) {
+            console.log("❌ Clearing User Cart failed");
+          }
 
           break;
         case "payment_intent.payment_failed":
