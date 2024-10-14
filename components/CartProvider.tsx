@@ -6,7 +6,7 @@ interface Product {
   name: string;
   price: number;
   image_url: string;
-  amount_in_stock: number;
+  available_stock: number;
   category: string;
   stripe_price_id: string;
 }

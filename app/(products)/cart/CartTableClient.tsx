@@ -47,9 +47,9 @@ export default function CartTableClient() {
                       {item.products.category.slice(0, 1).toUpperCase() +
                         item.products.category.slice(1)}
                     </p>
-                    {item.products.amount_in_stock <= 50 ? (
+                    {item.products.available_stock <= 50 ? (
                       <p className="mt-2 inline-block font-sans text-sm italic text-gold-600">
-                        <b>{item.products.amount_in_stock}</b> left in stock
+                        <b>{item.products.available_stock}</b> left in stock
                       </p>
                     ) : (
                       <p className="mt-2 inline-block font-sans text-sm italic text-gold-600">

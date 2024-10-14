@@ -13,7 +13,7 @@ export default async function Product({ params }: Props) {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("products")
-    .select("id, name, description, price, amount_in_stock, image_url")
+    .select("id, name, description, price, available_stock, image_url")
     .eq("name", item)
     .single();
 
@@ -37,9 +37,9 @@ export default async function Product({ params }: Props) {
             <p className="mt-4 min-w-[45ch] max-w-[75ch] font-sans text-sm text-muted-foreground">
               {data.description}
             </p>
-            {data.amount_in_stock <= 50 ? (
+            {data.available_stock <= 50 ? (
               <p className="mt-2 inline-block font-sans text-sm italic text-gold-600">
-                <b>{data.amount_in_stock}</b> left in stock
+                <b>{data.available_stock}</b> left in stock
               </p>
             ) : (
               <p className="mt-2 inline-block font-sans text-sm italic text-gold-600">
