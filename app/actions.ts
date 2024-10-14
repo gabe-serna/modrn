@@ -8,15 +8,27 @@ import { CartItem } from "@/components/CartProvider";
 import { stripe } from "@/utils/stripe/server";
 
 export const signUpAction = async (formData: FormData) => {
+  const name = formData.get("name")?.toString();
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const origin = headers().get("origin");
 
-  if (!email || !password) {
-    return { error: "Email and password are required" };
+  if (!name || !email || !password) {
+    return { error: "All Fields are Required" };
   }
+
+  // Create a new Stripe Customer
+  const customer = await stripe.customers.create({
+    name: name,
+    email: email,
+  });
+
+  // Create a new user in Supabase
   const supabase = createClient();
-  const { error } = await supabase.auth.signUp({
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -27,6 +39,18 @@ export const signUpAction = async (formData: FormData) => {
   if (error) {
     console.error(error.code + " " + error.message);
     return encodedRedirect("error", "/sign-up", error.message);
+  }
+
+  // Create a new stripe customer record in Supabase
+  const { error: err } = await supabase
+    .from("stripe_customers")
+    .insert([
+      { name: name, user_id: user?.id, stripe_customer_id: customer.id },
+    ]);
+
+  if (err) {
+    console.error(err.code + " " + err.message);
+    return encodedRedirect("error", "/sign-up", err.message);
   } else {
     return encodedRedirect(
       "success",
