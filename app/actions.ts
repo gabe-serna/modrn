@@ -136,11 +136,21 @@ export const createCheckoutSession = async (cartItems: CartItem[]) => {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const { data } = await supabase
+    .from("stripe_customers")
+    .select("stripe_customer_id")
+    .eq("user_id", user?.id)
+    .single();
+
   // Create a new Checkout Session
   const origin: string = headers().get("origin") as string;
   const checkoutSession = await stripe.checkout.sessions.create({
+    metadata: {
+      user_id: user?.id || "",
+    },
     mode: "payment",
-    customer_email: user?.email || "",
+    customer: data?.stripe_customer_id,
+    // customer_email: user?.email || "",
     line_items: cartItems.map((item) => ({
       price: item.products.stripe_price_id,
       quantity: item.quantity,

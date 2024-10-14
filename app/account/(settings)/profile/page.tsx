@@ -1,31 +1,22 @@
-"use client";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
 
-interface InfoProps {
-  email: string | undefined;
-  phone: string | undefined;
-}
+export default async function Profile() {
+  const supabase = createClient();
 
-const Profile = () => {
-  const supabase = useMemo(() => createClient(), []);
-  const [info, setInfo] = useState({} as InfoProps);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    console.log("No user found!");
+    return;
+  }
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) return;
-      const phone = user.phone || "none";
-      setInfo({
-        email: user.email as string,
-        phone: phone,
-      });
-    };
-    fetchProfile();
-  }, []);
+  const { data: stripe_customers, error } = await supabase
+    .from("stripe_customers")
+    .select("stripe_customer_id")
+    .eq("user_id", user.id)
+    .single();
 
   return (
     <section className="grid w-3/4 gap-6">
@@ -38,27 +29,29 @@ const Profile = () => {
       <main className="grid gap-6">
         <figure>
           <figcaption className="text-xl font-bold">Email</figcaption>
-          {info.email ? (
-            <p className="font-sans text-sm text-muted-foreground">
-              {info.email}
-            </p>
-          ) : (
-            <Loading />
-          )}
+          <p className="font-sans text-sm text-muted-foreground">
+            {user.email}
+          </p>
         </figure>
         <figure className="mt-2">
           <figcaption className="text-xl font-bold">Phone</figcaption>
-          {info.phone === "none" ? (
+          {user.phone ? (
             <p className="font-sans text-sm italic text-stone-500">
               No Phone Number Added
             </p>
-          ) : info.phone ? (
-            <p className="font-sans text-sm text-muted-foreground">
-              {info.phone}
-            </p>
           ) : (
-            <Loading />
+            <p className="font-sans text-sm text-muted-foreground">
+              {user.phone}
+            </p>
           )}
+        </figure>
+        <figure className="mt-2">
+          <figcaption className="text-xl font-bold">
+            Stripe Customer Id
+          </figcaption>
+          <p className="font-sans text-sm text-muted-foreground">
+            {stripe_customers?.stripe_customer_id || "No Stripe Customer Id"}
+          </p>
         </figure>
         <figure className="mt-2">
           <figcaption className="text-xl font-bold">Password</figcaption>
@@ -70,12 +63,4 @@ const Profile = () => {
       </main>
     </section>
   );
-};
-
-export default Profile;
-
-import { Skeleton } from "@/components/ui/skeleton";
-
-const Loading = () => {
-  return <Skeleton className="h-[20px] w-1/4 rounded-full" />;
-};
+}
