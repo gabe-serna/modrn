@@ -47,5 +47,11 @@ export const updateSession = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/account", request.url));
   }
 
+  if (
+    request.nextUrl.pathname.startsWith("/admin") &&
+    !user?.user_metadata.admin
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
   return response;
 };

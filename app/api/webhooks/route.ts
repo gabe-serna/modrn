@@ -55,6 +55,12 @@ export async function POST(req: Request) {
           const supabaseAdmin = createClient(
             process.env.NEXT_PUBLIC_SUPABASE_URL!,
             process.env.SUPABASE_SECRET_KEY!,
+            {
+              auth: {
+                autoRefreshToken: false,
+                persistSession: false,
+              },
+            },
           );
 
           const { data: order, error: orderError } = await supabaseAdmin

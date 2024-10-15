@@ -26,6 +26,8 @@ const NavBar = async () => {
     .eq("user_id", user?.id)
     .single();
 
+  const isAdmin = user?.user_metadata.admin;
+
   return (
     <nav className="fixed z-50 flex h-20 w-full items-center justify-center space-x-8 border-b border-b-foreground/10 bg-background">
       <Link
@@ -46,7 +48,7 @@ const NavBar = async () => {
       <div className="absolute right-10 flex items-center justify-center space-x-5">
         {user && (
           <h2 className="font-sans text-sm italic text-stone-500">
-            Welcome, {data?.name}
+            Welcome, {data?.name || "User"} {isAdmin && "(Admin)"}
           </h2>
         )}
         <Link href="/cart">
@@ -75,6 +77,16 @@ const NavBar = async () => {
                       Orders
                     </NavigationMenuLink>
                   </Link>
+                  {isAdmin && (
+                    <>
+                      <hr className="mt-1.5 border-gold-800" />
+                      <Link href="/admin" legacyBehavior passHref>
+                        <NavigationMenuLink className="mt-0.5 font-sans text-sm text-stone-500 transition-colors hover:text-stone-600">
+                          Admin Panel
+                        </NavigationMenuLink>
+                      </Link>
+                    </>
+                  )}
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>

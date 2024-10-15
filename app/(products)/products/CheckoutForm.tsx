@@ -1,12 +1,3 @@
-//this form will add the product to the cart
-//and will redirect to the cart page where
-//the user can see the products in the cart
-//and proceed to checkout if they want or
-//return to shopping
-
-//if the user is not logged in, they will be
-//redirected to the login page, and once they log in
-//they will be redirected back to the checkout page
 "use client";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
