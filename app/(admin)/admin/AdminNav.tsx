@@ -81,7 +81,7 @@ export default function AdminNav({ orders, screen }: Props) {
               {item.icon}
               {item.label}
               {item.badge && (
-                <Badge className="ml-auto flex size-6 shrink-0 items-center justify-center rounded-full bg-red-700 text-base font-bold text-red-100 hover:bg-red-700">
+                <Badge className="ml-auto flex size-6 shrink-0 items-center justify-center rounded-full bg-red-700 font-sans text-sm font-bold text-red-100 hover:bg-red-700">
                   {item.badge}
                 </Badge>
               )}
@@ -109,7 +109,7 @@ export default function AdminNav({ orders, screen }: Props) {
               {item.icon}
               {item.label}
               {item.badge && (
-                <Badge className="ml-auto flex size-8 shrink-0 items-center justify-center rounded-full bg-red-700 text-lg font-bold text-red-100 hover:bg-red-700">
+                <Badge className="ml-auto flex size-8 shrink-0 items-center justify-center rounded-full bg-red-700 font-sans text-base font-bold text-red-100 hover:bg-red-700">
                   {item.badge}
                 </Badge>
               )}

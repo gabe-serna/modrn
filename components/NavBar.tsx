@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import AccountDropdown from "./AccountDropdown";
+import { Badge } from "@/components/ui/badge";
 
 const NavBar = async () => {
   const supabase = createClient();
@@ -17,6 +18,12 @@ const NavBar = async () => {
     .eq("user_id", user?.id)
     .single();
 
+  const { count: countResult } = await supabase
+    .from("cart_items")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", user?.id);
+
+  const count = !countResult ? null : countResult > 0 ? countResult : null;
   const isAdmin = user?.user_metadata.admin;
 
   return (
@@ -42,8 +49,13 @@ const NavBar = async () => {
             Welcome, {data?.name || "User"} {isAdmin && "(Admin)"}
           </h2>
         )}
-        <Link href="/cart">
+        <Link href="/cart" className="relative">
           <ShoppingCart className="size-5 stroke-gold-200 transition-colors hover:stroke-gold-300" />
+          {count && (
+            <Badge className="absolute -right-4 -top-3 flex size-4 items-center justify-center bg-red-700 p-2 font-sans text-xs font-bold text-red-100 hover:bg-red-700">
+              {count}
+            </Badge>
+          )}
         </Link>
         <AccountDropdown />
       </div>
