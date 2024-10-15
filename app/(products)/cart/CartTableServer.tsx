@@ -11,7 +11,7 @@ import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import TrashCartItem from "./TrashCartItem";
 import { Gem } from "lucide-react";
-import ShopNowButton from "./ShopNowButton";
+import ShopNowButton from "@/components/ShopNowButton";
 import CartQuantity from "./CartQuantity";
 import CheckoutButton from "./CheckoutButton";
 

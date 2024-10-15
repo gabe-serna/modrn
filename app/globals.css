@@ -15,6 +15,10 @@ body {
   border-radius: 3px;
 }
 
+p {
+  font-family: sans-serif;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import TrashCartItem from "./TrashCartItem";
-import ShopNowButton from "./ShopNowButton";
+import ShopNowButton from "@/components/ShopNowButton";
 import { Gem } from "lucide-react";
 import { CartContext } from "@/components/CartProvider";
 import { useContext } from "react";
