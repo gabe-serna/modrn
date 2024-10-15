@@ -1,6 +1,10 @@
+"use client";
 import { ThemeSwitcher } from "./theme-switcher";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+  const pathname = usePathname();
+  if (pathname.includes("/admin")) return null;
   return (
     <footer className="mx-auto flex w-full items-center justify-center gap-8 border-t py-16 text-center text-xs">
       <p>
