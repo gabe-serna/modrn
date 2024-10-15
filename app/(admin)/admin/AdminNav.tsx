@@ -6,10 +6,11 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
 interface Props {
+  orders: number | null;
   screen: "desktop" | "mobile";
 }
 
-export default function AdminNav({ screen }: Props) {
+export default function AdminNav({ orders, screen }: Props) {
   const pathname = usePathname();
   const isDesktop = screen === "desktop";
 
@@ -31,7 +32,7 @@ export default function AdminNav({ screen }: Props) {
           className={"/admin/orders" === pathname ? activeStyle : baseStyle}
         />
       ),
-      badge: 6,
+      badge: orders,
     },
     {
       href: "/admin/inventory",

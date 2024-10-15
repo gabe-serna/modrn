@@ -3,7 +3,7 @@ import type { Stripe } from "stripe";
 import { NextResponse } from "next/server";
 
 import { stripe } from "@/utils/stripe/server";
-import { createClient } from "@supabase/supabase-js";
+import { createAdminClient } from "@/utils/supabase/admin";
 
 interface LineItem {
   id: number;
@@ -52,16 +52,7 @@ export async function POST(req: Request) {
           data = event.data.object as Stripe.Checkout.Session;
 
           // Create new Order Entry in Supabase
-          const supabaseAdmin = createClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL!,
-            process.env.SUPABASE_SECRET_KEY!,
-            {
-              auth: {
-                autoRefreshToken: false,
-                persistSession: false,
-              },
-            },
-          );
+          const supabaseAdmin = createAdminClient();
 
           const { data: order, error: orderError } = await supabaseAdmin
             .from("orders")

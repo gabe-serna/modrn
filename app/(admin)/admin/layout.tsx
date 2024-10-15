@@ -9,14 +9,25 @@ import {
 } from "@/components/ui/sheet";
 import { ReactNode } from "react";
 import AdminNav from "./AdminNav";
+import { createAdminClient } from "@/utils/supabase/admin";
 
-export default function AdminLayout({ children }: { children: ReactNode }) {
+export default async function AdminLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const supabase = createAdminClient();
+  const { count } = await supabase
+    .from("orders")
+    .select("*", { count: "exact", head: true })
+    .eq("order_status", "UNFULFILLED");
+
   return (
     <div className="grid min-h-[calc(100vh-5rem)] w-[calc(100vw-12px)] md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden overflow-y-hidden border-r bg-muted/40 md:block">
         <div className="mt-4 flex h-full max-h-screen flex-col gap-2">
           <div className="flex-1">
-            <AdminNav screen="desktop" />
+            <AdminNav orders={count} screen="desktop" />
           </div>
         </div>
       </div>
@@ -35,7 +46,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
-              <AdminNav screen="mobile" />
+              <AdminNav orders={count} screen="mobile" />
             </SheetContent>
           </Sheet>
         </header>
