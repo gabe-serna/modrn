@@ -1,7 +1,12 @@
 import { Menu } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { ReactNode } from "react";
 import AdminNav from "./AdminNav";
 
@@ -18,6 +23,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:hidden">
           <Sheet>
+            <SheetTitle />
             <SheetTrigger asChild>
               <Button
                 variant="outline"
