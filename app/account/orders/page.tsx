@@ -13,6 +13,22 @@ import { ChevronRight, ShoppingBasket } from "lucide-react";
 import ShopNowButton from "@/components/ShopNowButton";
 import Link from "next/link";
 
+interface CartData {
+  id: string;
+  created_at: string;
+  total: number;
+  order_status: string;
+  shipment_status: string;
+  order_items: {
+    id: string;
+    quantity: number;
+    products: {
+      name: string;
+      image_url: string;
+    };
+  }[];
+}
+
 export default async function Orders() {
   const supabase = createClient();
   const {
@@ -24,37 +40,17 @@ export default async function Orders() {
     return;
   }
 
-  const { data: rawData, error: err } = await supabase
+  const { data, error: err } = await supabase
     .from("orders")
     .select(
       "id, created_at, total:amount_total, order_status, shipment_status, order_items(id, quantity, products(name, image_url))",
     )
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .returns<CartData[]>();
   if (err) {
     console.error(err);
     return;
   }
-
-  // Type assertion to treat products as a single object
-  const data = rawData?.map((item) => {
-    return {
-      id: item.id,
-      created_at: item.created_at,
-      total: item.total,
-      order_status: item.order_status,
-      shipment_status: item.shipment_status,
-      order_items: item.order_items.map((orderItem) => {
-        return {
-          id: orderItem.id,
-          quantity: orderItem.quantity,
-          products: orderItem.products as unknown as {
-            name: string;
-            image_url: string;
-          },
-        };
-      }),
-    };
-  });
 
   if (data.length > 0) {
     return (

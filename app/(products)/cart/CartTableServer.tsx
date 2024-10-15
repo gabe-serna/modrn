@@ -15,6 +15,20 @@ import ShopNowButton from "@/components/ShopNowButton";
 import CartQuantity from "./CartQuantity";
 import CheckoutButton from "./CheckoutButton";
 
+interface CartData {
+  id: number;
+  quantity: number;
+  products: {
+    id: number;
+    name: string;
+    price: number;
+    image_url: string;
+    available_stock: number;
+    category: string;
+    stripe_price_id: string;
+  };
+}
+
 export default async function CartTableServer() {
   const supabase = createClient();
   const {
@@ -26,33 +40,17 @@ export default async function CartTableServer() {
     return;
   }
 
-  const { data: rawData, error: err } = await supabase
+  const { data, error: err } = await supabase
     .from("cart_items")
     .select(
       "id, quantity, products!product_id(id, name, price, image_url, available_stock, category, stripe_price_id)",
     )
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .returns<CartData[]>();
   if (err) {
     console.error(err);
     return;
   }
-
-  // Type assertion to treat products as a single object
-  const data = rawData?.map((item) => {
-    return {
-      id: item.id,
-      quantity: item.quantity,
-      products: item.products as unknown as {
-        id: number;
-        name: string;
-        price: number;
-        image_url: string;
-        available_stock: number;
-        category: string;
-        stripe_price_id: string;
-      },
-    };
-  });
 
   if (data.length > 0) {
     return (
