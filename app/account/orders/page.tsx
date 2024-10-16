@@ -12,7 +12,7 @@ import Image from "next/image";
 import { ChevronRight, ShoppingBasket } from "lucide-react";
 import ShopNowButton from "@/components/ShopNowButton";
 import Link from "next/link";
-import { formatDateToLocal } from "@/utils/formatDate";
+import { formatDateToLocal } from "@/utils/dates";
 
 interface CartData {
   id: string;

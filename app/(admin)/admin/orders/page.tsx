@@ -17,9 +17,10 @@ export default async function Orders() {
             />
           </div>
           <ToggleGroup type="single">
-            <ToggleGroupItem value="all">ALL</ToggleGroupItem>
+            <ToggleGroupItem value="new">NEW</ToggleGroupItem>
             <ToggleGroupItem value="transit">TRANSIT</ToggleGroupItem>
             <ToggleGroupItem value="fulfilled">FULFILLED</ToggleGroupItem>
+            <ToggleGroupItem value="all">ALL</ToggleGroupItem>
           </ToggleGroup>
         </form>
       </div>
