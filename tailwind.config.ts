@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        serif: ["var(--font-josefin-slab)"],
+        sans: ["var(--font-work-sans)"],
+      },
       colors: {
         gold: {
           100: "#f9f3e9",
