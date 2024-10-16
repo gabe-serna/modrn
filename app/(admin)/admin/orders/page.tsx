@@ -1,14 +1,14 @@
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import OrderList from "./OrderList";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export default async function Orders() {
   return (
-    <>
-      <div className="flex items-center pl-4">
-        <h1 className="text-lg font-semibold md:text-2xl">Orders</h1>
-        <form className="w-full">
-          <div className="relative ml-8 w-full md:w-2/3 lg:w-1/2">
+    <div className="mx-auto min-w-[1012px]">
+      <div className="flex max-w-[1012px] items-center">
+        <form className="flex w-full justify-between">
+          <div className="relative w-full md:w-2/3 lg:w-1/2">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
@@ -16,11 +16,16 @@ export default async function Orders() {
               className="w-full appearance-none bg-background pl-8 shadow-none"
             />
           </div>
+          <ToggleGroup type="single">
+            <ToggleGroupItem value="all">ALL</ToggleGroupItem>
+            <ToggleGroupItem value="transit">TRANSIT</ToggleGroupItem>
+            <ToggleGroupItem value="fulfilled">FULFILLED</ToggleGroupItem>
+          </ToggleGroup>
         </form>
       </div>
-      <div className="max-h-[calc(100vh-12rem)] min-h-[calc(100vh-12rem)] w-auto overflow-y-scroll">
+      <div className="mt-2 max-h-[calc(100vh-11.5rem)] min-h-[calc(100vh-11.5rem)] max-w-[1012px] overflow-y-scroll rounded-lg border">
         <OrderList />
       </div>
-    </>
+    </div>
   );
 }

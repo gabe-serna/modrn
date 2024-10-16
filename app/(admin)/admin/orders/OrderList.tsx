@@ -46,10 +46,10 @@ export default async function OrderList() {
   if (orders.length > 0) {
     return (
       <Table className="size-full max-w-[1000px]">
-        <TableHeader>
+        <TableHeader className="h-12">
           <TableRow className="uppercase">
-            <TableHead className="tracking-wide text-gold-500">
-              Your Orders
+            <TableHead className="pl-6 tracking-wide text-gold-500">
+              Orders
             </TableHead>
             <TableHead className="tracking-wide text-gold-500">Total</TableHead>
             <TableHead className="w-[100px] tracking-wide text-gold-500">
@@ -61,7 +61,7 @@ export default async function OrderList() {
         <TableBody>
           {orders.map((order) => (
             <TableRow key={order.id}>
-              <TableCell className="flex py-12">
+              <TableCell className="flex py-12 pl-6">
                 <div className="flex flex-col">
                   <h1 className="relative text-2xl text-foreground">
                     <span className="absolute -left-3.5 -top-1 text-xl text-gold-500">
