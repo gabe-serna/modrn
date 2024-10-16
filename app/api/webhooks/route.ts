@@ -62,6 +62,7 @@ export async function POST(req: Request) {
                 email: data.customer_details?.email,
                 amount_total: data.amount_total,
                 amount_subtotal: data.amount_subtotal,
+                stripe_order_id: data.id,
               },
             ])
             .select()
