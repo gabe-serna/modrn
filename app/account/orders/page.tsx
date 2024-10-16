@@ -12,6 +12,7 @@ import Image from "next/image";
 import { ChevronRight, ShoppingBasket } from "lucide-react";
 import ShopNowButton from "@/components/ShopNowButton";
 import Link from "next/link";
+import { formatDateToLocal } from "@/utils/formatDate";
 
 interface CartData {
   id: string;
@@ -147,16 +148,4 @@ export default async function Orders() {
         <ShopNowButton />
       </div>
     );
-}
-
-function formatDateToLocal(dateString: string) {
-  const date = new Date(dateString);
-
-  const localDate = date.toLocaleDateString(undefined, {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  return `${localDate}`;
 }

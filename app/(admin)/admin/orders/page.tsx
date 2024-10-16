@@ -5,7 +5,7 @@ import OrderList from "./OrderList";
 export default async function Orders() {
   return (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center pl-4">
         <h1 className="text-lg font-semibold md:text-2xl">Orders</h1>
         <form className="w-full">
           <div className="relative ml-8 w-full md:w-2/3 lg:w-1/2">
@@ -18,7 +18,7 @@ export default async function Orders() {
           </div>
         </form>
       </div>
-      <div className="flex flex-1 items-center justify-center overflow-y-auto rounded-lg border border-dashed shadow-sm">
+      <div className="max-h-[calc(100vh-12rem)] min-h-[calc(100vh-12rem)] w-auto overflow-y-scroll">
         <OrderList />
       </div>
     </>
