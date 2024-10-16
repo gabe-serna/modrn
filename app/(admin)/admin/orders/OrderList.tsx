@@ -1,16 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { formatDateToLocal, getShippingMessage } from "@/utils/dates";
-import { ChevronRight, EllipsisVertical, Truck } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import Link from "next/link";
 
 interface CartData {
@@ -51,7 +44,7 @@ export default async function OrderList() {
             <TableRow key={order.id}>
               <TableCell className="flex pb-16 pl-20 pt-8">
                 <div className="flex flex-col">
-                  <h1 className="relative text-2xl font-bold tracking-wide text-foreground">
+                  <h1 className="relative text-xl font-bold tracking-wide text-foreground">
                     Peter Lastname
                   </h1>
                   <div className="flex w-max">
