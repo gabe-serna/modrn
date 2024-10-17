@@ -52,15 +52,6 @@ export default function AdminNav({ orders, screen }: Props) {
         />
       ),
     },
-    {
-      href: "/admin/analytics",
-      label: "Analytics",
-      icon: (
-        <LineChart
-          className={"/admin/analytics" === pathname ? activeStyle : baseStyle}
-        />
-      ),
-    },
   ];
   if (isDesktop)
     return (
