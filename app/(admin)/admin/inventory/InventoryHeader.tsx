@@ -10,8 +10,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { ListFilter, PlusCircle, Search } from "lucide-react";
-import { Filter, InventorySearch } from "./page";
+import {
+  ArrowDownNarrowWide,
+  ListFilter,
+  Search,
+  SlidersHorizontal,
+} from "lucide-react";
+import { Filter, InventorySearch, OrderField } from "./page";
 
 export default function InventoryHeader({
   search,
@@ -23,6 +28,15 @@ export default function InventoryHeader({
   function handleFilterChange(event: React.MouseEvent<HTMLDivElement>) {
     const filter = event.currentTarget.textContent?.toLowerCase() as Filter;
     setSearch({ ...search, filter });
+  }
+  function handleOrderChange(event: React.MouseEvent<HTMLDivElement>) {
+    let order = event.currentTarget.textContent?.toLowerCase() as string;
+    if (order === "in stock") order = "total_stock";
+    if (order === "ordered") order = "ordered_stock";
+    setSearch({
+      ...search,
+      order: { ...search.order, field: order as OrderField },
+    });
   }
   function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
     console.log("search", event.target.value);
@@ -48,18 +62,13 @@ export default function InventoryHeader({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className="group flex h-8 w-min items-center gap-2 bg-background px-3 py-5 hover:bg-accent">
-                <ListFilter className="mb-0.5 size-4 text-gold-600 group-hover:text-gold-500" />
+                <SlidersHorizontal className="mb-0.5 size-4 text-gold-600 group-hover:text-gold-500" />
                 <span className="sr-only text-base font-bold uppercase tracking-wider text-gold-700 group-hover:text-gold-600 sm:not-sr-only sm:whitespace-nowrap">
                   Filter
                 </span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              onChange={(filter) => console.log(filter)}
-            >
-              <DropdownMenuLabel>Filter by</DropdownMenuLabel>
-              <DropdownMenuSeparator />
+            <DropdownMenuContent align="end">
               <DropdownMenuCheckboxItem
                 onClick={handleFilterChange}
                 checked={search.filter == "all"}
@@ -80,12 +89,61 @@ export default function InventoryHeader({
               </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button className="group flex h-8 w-min items-center gap-2 bg-gold-700 px-3 py-5 hover:bg-gold-600">
-            <PlusCircle className="mb-0.5 size-4 text-stone-900 group-hover:text-stone-800" />
-            <span className="sr-only text-base font-bold uppercase tracking-wider text-stone-900 group-hover:text-stone-800 sm:not-sr-only sm:whitespace-nowrap">
-              Add Product
-            </span>
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="group flex h-8 w-min items-center gap-2 bg-background px-3 py-5 hover:bg-accent">
+                <ListFilter
+                  className={`mb-0.5 size-4 text-gold-600 transition-transform group-hover:text-gold-500 ${
+                    search.order.direction ? "rotate-180" : ""
+                  }`}
+                />
+                <span className="sr-only text-base font-bold uppercase tracking-wider text-gold-700 group-hover:text-gold-600 sm:not-sr-only sm:whitespace-nowrap">
+                  Order By
+                </span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <Button
+                className="text-serif h-min bg-card py-1.5 font-sans uppercase text-stone-500 hover:bg-accent"
+                onClick={() =>
+                  setSearch({
+                    ...search,
+                    order: {
+                      ...search.order,
+                      direction: !search.order.direction,
+                    },
+                  })
+                }
+              >
+                {search.order.direction == true ? "ascending" : "descending"}
+              </Button>
+              <DropdownMenuSeparator />
+              <DropdownMenuCheckboxItem
+                onClick={handleOrderChange}
+                checked={search.order.field == "name"}
+              >
+                Name
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                onClick={handleOrderChange}
+                checked={search.order.field == "price"}
+              >
+                Price
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                onClick={handleOrderChange}
+                checked={search.order.field == "total_stock"}
+              >
+                In Stock
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                onClick={handleOrderChange}
+                checked={search.order.field == "ordered_stock"}
+              >
+                Ordered
+              </DropdownMenuCheckboxItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>
