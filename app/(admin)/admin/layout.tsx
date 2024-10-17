@@ -20,7 +20,7 @@ export default async function AdminLayout({
   const { count } = await supabase
     .from("orders")
     .select("*", { count: "exact", head: true })
-    .eq("order_status", "UNFULFILLED");
+    .eq("shipment_status", "UNKNOWN");
 
   return (
     <div className="grid min-h-[calc(100vh-5rem)] w-[calc(100vw-12px)] md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">

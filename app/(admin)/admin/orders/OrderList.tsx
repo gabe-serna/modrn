@@ -1,10 +1,13 @@
-import { createClient } from "@/utils/supabase/server";
+"use client";
+import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { formatDateToLocal, getShippingMessage } from "@/utils/dates";
 import { EllipsisVertical } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CartData {
   id: string;
@@ -22,20 +25,70 @@ interface CartData {
   }[];
 }
 
-export default async function OrderList() {
-  const supabase = createClient();
-  const { data: orders, error: err } = await supabase
-    .from("orders")
-    .select(
-      "id, created_at, total:amount_total, order_status, shipment_status, order_items(id, quantity, products(name, image_url))",
-    )
-    .eq("order_status", "UNFULFILLED")
-    .returns<CartData[]>();
-  if (err) {
-    console.error(err);
-    return;
-  }
+export default function OrderList() {
+  const [orders, setOrders] = useState<CartData[] | null>(null);
 
+  useEffect(() => {
+    async function fetchOrders() {
+      setOrders(null);
+      const supabase = createClient();
+      const { data, error: err } = await supabase
+        .from("orders")
+        .select(
+          "id, created_at, total:amount_total, order_status, shipment_status, order_items(id, quantity, products(name, image_url))",
+        )
+        .eq("shipment_status", "UNKNOWN")
+        .returns<CartData[]>();
+      if (err) {
+        console.error(err);
+        return;
+      }
+      setOrders(data);
+    }
+    fetchOrders();
+  }, []);
+
+  if (!orders) {
+    return (
+      <Table className="size-full max-w-[1000px]">
+        <TableBody>
+          {Array.from({ length: 2 }).map((_value, index) => (
+            <TableRow key={index}>
+              <TableCell className="flex pb-14 pl-20 pt-9">
+                <div className="flex flex-col">
+                  <Skeleton className="h-5 w-44" />
+                  <div className="mt-4 flex w-max space-x-4">
+                    <Skeleton className="h-5 w-24" />
+                    <Skeleton className="h-5 w-16" />
+                  </div>
+                  <div className="mt-4 flex flex-col space-y-4">
+                    <div className="flex">
+                      <Skeleton className="size-16" />
+                      <div className="flex flex-col space-y-2 pl-4">
+                        <Skeleton className="h-5 w-44" />
+                        <Skeleton className="h-5 w-1/3" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell className="text-bold align-baseline text-xl">
+                <div className="flex w-max flex-col pl-48">
+                  <Skeleton className="h-5 w-32" />
+                  <Skeleton className="mt-2 h-5 w-32" />
+                  <div className="mt-4 flex w-max flex-col space-y-1">
+                    <Skeleton className="h-4 w-16" />
+                    <Skeleton className="h-4 w-16" />
+                  </div>
+                  <Skeleton className="mt-4 h-12 w-[17rem]" />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    );
+  }
   if (orders.length > 0) {
     return (
       <Table className="size-full max-w-[1000px]">
