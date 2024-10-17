@@ -77,7 +77,7 @@ export default function NewOrders({ orders }: { orders: CartData[] | null }) {
                             alt={orderItem.products.name}
                             width={64}
                             height={64}
-                            className="min-h-min min-w-min"
+                            className="min-h-min min-w-min rounded-md"
                             priority
                           />
                         </div>

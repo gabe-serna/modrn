@@ -31,6 +31,7 @@ export default async function Product({ params }: Props) {
             alt={data.name}
             width={450}
             height={450}
+            className="rounded-lg"
             priority
           />
           <div className="inline h-min max-w-[clamp(40ch,_35%,_65ch)]">

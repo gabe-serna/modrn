@@ -84,7 +84,7 @@ export default function TransitOrders({
                             alt={orderItem.products.name}
                             width={64}
                             height={64}
-                            className="min-h-min min-w-min"
+                            className="min-h-min min-w-min rounded-md"
                             priority
                           />
                         </div>
