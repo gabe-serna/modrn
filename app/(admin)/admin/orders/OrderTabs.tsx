@@ -10,7 +10,8 @@ export default function OrderTabs({
   activeTab: OrderTab;
   setActiveTab: (value: OrderTab) => void;
 }) {
-  const handleSelect = (value: OrderTab) => {
+  const handleSelect = (value: OrderTab | "") => {
+    if (value === "") return;
     setActiveTab(value);
   };
 
@@ -19,6 +20,7 @@ export default function OrderTabs({
       <ToggleGroupItem
         value="new"
         data-state={activeTab === "new" ? "on" : "off"}
+        aria-checked={activeTab === "new" ? "true" : "false"}
         className="pt-0.5"
       >
         NEW
@@ -26,6 +28,7 @@ export default function OrderTabs({
       <ToggleGroupItem
         value="transit"
         data-state={activeTab === "transit" ? "on" : "off"}
+        aria-checked={activeTab === "transit" ? "true" : "false"}
         className="pt-0.5"
       >
         TRANSIT
@@ -33,16 +36,10 @@ export default function OrderTabs({
       <ToggleGroupItem
         value="fulfilled"
         data-state={activeTab === "fulfilled" ? "on" : "off"}
+        aria-checked={activeTab === "fulfilled" ? "true" : "false"}
         className="pt-0.5"
       >
         FULFILLED
-      </ToggleGroupItem>
-      <ToggleGroupItem
-        value="all"
-        data-state={activeTab === "all" ? "on" : "off"}
-        className="pt-0.5"
-      >
-        ALL
       </ToggleGroupItem>
     </ToggleGroup>
   );

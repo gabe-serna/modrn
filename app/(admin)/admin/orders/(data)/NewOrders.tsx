@@ -7,7 +7,7 @@ import { formatDateToLocal, getShippingMessage } from "@/utils/dates";
 import { Button } from "@/components/ui/button";
 import { EllipsisVertical, ShoppingBasket } from "lucide-react";
 
-export function NewOrders({ orders }: { orders: CartData[] | null }) {
+export default function NewOrders({ orders }: { orders: CartData[] | null }) {
   if (!orders) {
     return (
       <Table className="size-full max-w-[1000px]">

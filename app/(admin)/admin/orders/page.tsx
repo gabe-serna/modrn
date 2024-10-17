@@ -3,7 +3,7 @@ import { useState } from "react";
 import OrderList from "./OrderList";
 import OrderTabs from "./OrderTabs";
 
-export type OrderTab = "new" | "transit" | "fulfilled" | "all";
+export type OrderTab = "new" | "transit" | "fulfilled";
 
 export default function Orders() {
   const [activeTab, setActiveTab] = useState<OrderTab>("new");

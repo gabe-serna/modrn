@@ -10,7 +10,11 @@ import {
 } from "@/utils/dates";
 import { EllipsisVertical, Truck } from "lucide-react";
 
-export function TransitOrders({ orders }: { orders: CartData[] | null }) {
+export default function TransitOrders({
+  orders,
+}: {
+  orders: CartData[] | null;
+}) {
   if (!orders) {
     return (
       <Table className="size-full max-w-[1000px]">
