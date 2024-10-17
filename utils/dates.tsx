@@ -86,3 +86,59 @@ export function getTransitMessage(inputDate: string): JSX.Element {
     );
   }
 }
+
+export function getDeliveredMessage(inputDate: string): JSX.Element {
+  const inputDateObj = new Date(inputDate);
+  const inputDateOnly = new Date(
+    inputDateObj.getFullYear(),
+    inputDateObj.getMonth(),
+    inputDateObj.getDate(),
+  );
+
+  const currentDate = new Date();
+  const currentDateOnly = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate(),
+  );
+
+  const timeDifference = currentDateOnly.getTime() - inputDateOnly.getTime();
+  const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+  if (daysDifference === 0) {
+    return <span>Delivered today</span>;
+  } else if (daysDifference === 1) {
+    return <span>Delivered yesterday</span>;
+  } else if (daysDifference <= 10) {
+    return (
+      <span>
+        Delivered <span className="text-gold-400">{daysDifference}</span> days
+        ago
+      </span>
+    );
+  } else if (daysDifference <= 30) {
+    return (
+      <span>
+        Delivered{" "}
+        <span className="text-gold-400">{Math.floor(daysDifference / 7)}</span>{" "}
+        weeks ago
+      </span>
+    );
+  } else if (daysDifference <= 365) {
+    const monthsDifference = Math.floor(daysDifference / 30);
+    return (
+      <span>
+        Delivered <span className="text-gold-400">{monthsDifference}</span>{" "}
+        months ago
+      </span>
+    );
+  } else {
+    const yearsDifference = Math.floor(daysDifference / 365);
+    return (
+      <span>
+        Delivered <span className="text-red-400">{yearsDifference}</span> years
+        ago
+      </span>
+    );
+  }
+}

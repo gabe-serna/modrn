@@ -5,12 +5,13 @@ import { CartData } from "../OrderList";
 import Link from "next/link";
 import {
   formatDateToLocal,
+  getDeliveredMessage,
   getShippingMessage,
   getTransitMessage,
 } from "@/utils/dates";
-import { EllipsisVertical, Truck } from "lucide-react";
+import { EllipsisVertical, Package, Truck } from "lucide-react";
 
-export function TransitOrder({ orders }: { orders: CartData[] | null }) {
+export function FulfilledOrder({ orders }: { orders: CartData[] | null }) {
   if (!orders) {
     return (
       <Table className="size-full max-w-[1000px]">
@@ -104,7 +105,7 @@ export function TransitOrder({ orders }: { orders: CartData[] | null }) {
               <TableCell className="text-bold align-baseline text-xl">
                 <div className="flex flex-col">
                   <h1 className="text-lg font-bold text-foreground">
-                    {getTransitMessage(order.created_at)}
+                    {getDeliveredMessage(order.created_at)}
                   </h1>
                   <p className="text-sm text-stone-500">
                     Ordered {formatDateToLocal(order.created_at, true)}
@@ -149,9 +150,9 @@ export function TransitOrder({ orders }: { orders: CartData[] | null }) {
               "linear-gradient(black 0%, rgba(0,0,0,0.25) 60%, transparent 95%)",
           }}
         >
-          <Truck className="size-24 stroke-gold-500" />
+          <Package className="size-24 stroke-gold-500" />
         </div>
-        <h1 className="text-4xl font-bold">No Orders in Transit</h1>
+        <h1 className="text-4xl font-bold">No Fulfilled Orders</h1>
         <p className="mb-20 mt-2 font-sans italic text-muted-foreground">
           Relax, you're all caught up for now.
         </p>

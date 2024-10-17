@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { OrderTab } from "./page";
 import { NewOrder } from "./(data)/NewOrder";
 import { TransitOrder } from "./(data)/TransitOrder";
+import { FulfilledOrder } from "./(data)/FulfilledOrder";
 
 export interface CartData {
   id: string;
@@ -48,12 +49,21 @@ export default function OrderList({ activeTab }: { activeTab: OrderTab }) {
       setOrders(null);
       const supabase = createClient();
 
+      let filter;
       switch (activeTab) {
-        case "new": {
+        case "new":
+          filter = "UNKNOWN";
+          break;
+        case "transit":
+          filter = "TRANSIT";
+          break;
+        case "fulfilled":
+          filter = "DELIVERED";
+          break;
+        case "all":
           const { data, error: err } = await supabase
             .from("orders")
             .select("*, order_items(id, quantity, products(name, image_url))")
-            .eq("shipment_status", "UNKNOWN")
             .order("created_at", { ascending: true })
             .returns<CartData[]>();
           if (err) {
@@ -61,27 +71,20 @@ export default function OrderList({ activeTab }: { activeTab: OrderTab }) {
             return;
           }
           setOrders(data);
-          break;
-        }
-        case "transit": {
-          const { data, error: err } = await supabase
-            .from("orders")
-            .select("*, order_items(id, quantity, products(name, image_url))")
-            .eq("shipment_status", "TRANSIT")
-            .order("created_at", { ascending: true })
-            .returns<CartData[]>();
-          if (err) {
-            console.error(err);
-            return;
-          }
-          setOrders(data);
-          break;
-        }
-        case "fulfilled": {
-        }
-        case "all": {
-        }
+          return;
       }
+
+      const { data, error: err } = await supabase
+        .from("orders")
+        .select("*, order_items(id, quantity, products(name, image_url))")
+        .eq("shipment_status", filter)
+        .order("created_at", { ascending: true })
+        .returns<CartData[]>();
+      if (err) {
+        console.error(err);
+        return;
+      }
+      setOrders(data);
     }
     fetchOrders(activeTab);
   }, [activeTab]);
@@ -91,7 +94,9 @@ export default function OrderList({ activeTab }: { activeTab: OrderTab }) {
       return <NewOrder orders={orders} />;
     case "transit":
       return <TransitOrder orders={orders} />;
-    default:
-      return <div>Not implemented</div>;
+    case "fulfilled":
+      return <FulfilledOrder orders={orders} />;
+    case "all":
+      return <FulfilledOrder orders={orders} />;
   }
 }
