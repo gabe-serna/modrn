@@ -1,11 +1,14 @@
 "use client";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { useState } from "react";
 
-export default function OrderTabs() {
-  const [activeTab, setActiveTab] = useState("new");
-
+export default function OrderTabs({
+  activeTab,
+  setActiveTab,
+}: {
+  activeTab: string;
+  setActiveTab: (value: string) => void;
+}) {
   const handleSelect = (value: string) => {
     setActiveTab(value);
   };

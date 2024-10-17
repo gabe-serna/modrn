@@ -12,12 +12,11 @@ const NavBar = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("stripe_customers")
     .select("name")
     .eq("user_id", user?.id)
     .single();
-  if (error) console.log("error", error);
 
   const { count: countResult } = await supabase
     .from("cart_items")

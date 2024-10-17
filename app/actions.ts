@@ -180,6 +180,8 @@ export const createCheckoutSession = async (cartItems: CartItem[]) => {
       ),
     },
     mode: "payment",
+    shipping_address_collection: { allowed_countries: ["US"] },
+    shipping_options: [{ shipping_rate: "shr_1QArbsF4zz7XCw30HutlerWi" }],
     customer: data?.stripe_customer_id,
     line_items: cartItems.map((item) => ({
       price: item.products.stripe_price_id,

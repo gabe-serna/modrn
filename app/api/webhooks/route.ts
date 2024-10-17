@@ -59,10 +59,17 @@ export async function POST(req: Request) {
             .insert([
               {
                 user_id: data.metadata?.user_id || null,
+                name: data.customer_details?.name,
                 email: data.customer_details?.email,
                 amount_total: data.amount_total,
                 amount_subtotal: data.amount_subtotal,
-                stripe_order_id: data.id,
+                stripe_order_id: data.payment_intent,
+                ship_to: data.shipping_details?.name,
+                city: data.shipping_details?.address?.city,
+                line1: data.shipping_details?.address?.line1,
+                line2: data.shipping_details?.address?.line2,
+                state: data.shipping_details?.address?.state,
+                postal_code: data.shipping_details?.address?.postal_code,
               },
             ])
             .select()

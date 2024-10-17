@@ -12,9 +12,16 @@ import { Skeleton } from "@/components/ui/skeleton";
 interface CartData {
   id: string;
   created_at: string;
+  name: string;
   total: number;
   order_status: string;
   shipment_status: string;
+  ship_to: string;
+  city: string;
+  line1: string;
+  line2: string;
+  state: string;
+  postal_code: string;
   order_items: {
     id: string;
     quantity: number;
@@ -25,28 +32,41 @@ interface CartData {
   }[];
 }
 
-export default function OrderList() {
+export default function OrderList({ activeTab }: { activeTab: string }) {
   const [orders, setOrders] = useState<CartData[] | null>(null);
 
   useEffect(() => {
-    async function fetchOrders() {
-      setOrders(null);
-      const supabase = createClient();
-      const { data, error: err } = await supabase
-        .from("orders")
-        .select(
-          "id, created_at, total:amount_total, order_status, shipment_status, order_items(id, quantity, products(name, image_url))",
-        )
-        .eq("shipment_status", "UNKNOWN")
-        .returns<CartData[]>();
-      if (err) {
-        console.error(err);
-        return;
+    async function fetchOrders(activeTab: string) {
+      switch (activeTab) {
+        case "new": {
+          setOrders(null);
+          const supabase = createClient();
+          const { data, error: err } = await supabase
+            .from("orders")
+            .select(
+              "id, created_at, name, total:amount_total, order_status, shipment_status, ship_to, city, line1, line2, state, postal_code, order_items(id, quantity, products(name, image_url))",
+            )
+            .eq("shipment_status", "UNKNOWN")
+            .order("created_at", { ascending: true })
+            .returns<CartData[]>();
+          if (err) {
+            console.error(err);
+            return;
+          }
+          setOrders(data);
+          break;
+        }
+        case "transit": {
+        }
+        case "fulfilled": {
+        }
+        case "all":
+        default: {
+        }
       }
-      setOrders(data);
     }
-    fetchOrders();
-  }, []);
+    fetchOrders(activeTab);
+  }, [activeTab]);
 
   if (!orders) {
     return (
@@ -98,7 +118,7 @@ export default function OrderList() {
               <TableCell className="flex pb-16 pl-20 pt-8">
                 <div className="flex flex-col">
                   <h1 className="relative text-xl font-bold tracking-wide text-foreground">
-                    Peter Lastname
+                    {order.name || "Guest"}
                   </h1>
                   <div className="flex w-max">
                     <h2 className="relative font-sans text-base text-stone-500">
@@ -149,8 +169,12 @@ export default function OrderList() {
                   </p>
                   <div className="mt-4 flex flex-col space-y-1 text-xs">
                     <h2 className="sr-only">Ship to</h2>
-                    <p className="font-bold text-muted-foreground">John Doe</p>
-                    <p className="text-muted-foreground">Seattle, WA</p>
+                    <p className="font-bold text-muted-foreground">
+                      {order.ship_to}
+                    </p>
+                    <p className="text-muted-foreground">
+                      {order.city}, {order.state}
+                    </p>
                   </div>
                   <Button className="mt-4 bg-gold-800 text-base font-bold tracking-wide text-foreground hover:bg-gold-700">
                     Buy Shipping Label
