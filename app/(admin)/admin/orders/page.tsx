@@ -3,8 +3,10 @@ import { useState } from "react";
 import OrderList from "./OrderList";
 import OrderTabs from "./OrderTabs";
 
+export type OrderTab = "new" | "transit" | "fulfilled" | "all";
+
 export default function Orders() {
-  const [activeTab, setActiveTab] = useState("new");
+  const [activeTab, setActiveTab] = useState<OrderTab>("new");
 
   return (
     <div className="mx-auto min-w-[1012px]">

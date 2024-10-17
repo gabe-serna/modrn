@@ -49,3 +49,40 @@ export function getShippingMessage(inputDate: string): JSX.Element {
     );
   }
 }
+
+export function getTransitMessage(inputDate: string): JSX.Element {
+  const inputDateObj = new Date(inputDate);
+  const inputDateOnly = new Date(
+    inputDateObj.getFullYear(),
+    inputDateObj.getMonth(),
+    inputDateObj.getDate(),
+  );
+
+  const currentDate = new Date();
+  const currentDateOnly = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate(),
+  );
+
+  const timeDifference = currentDateOnly.getTime() - inputDateOnly.getTime();
+  const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+  if (daysDifference === 0) {
+    return <span>Shipped today</span>;
+  } else if (daysDifference === 1) {
+    return <span>Shipped yesterday</span>;
+  } else if (daysDifference <= 10) {
+    return (
+      <span>
+        Shipped <span className="text-gold-400">{daysDifference}</span> days ago
+      </span>
+    );
+  } else {
+    return (
+      <span className="text-red-400">
+        Shipped <b>{daysDifference}</b> days ago
+      </span>
+    );
+  }
+}

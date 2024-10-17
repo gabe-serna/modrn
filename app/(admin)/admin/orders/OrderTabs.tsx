@@ -1,15 +1,16 @@
 "use client";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { OrderTab } from "./page";
 
 export default function OrderTabs({
   activeTab,
   setActiveTab,
 }: {
-  activeTab: string;
-  setActiveTab: (value: string) => void;
+  activeTab: OrderTab;
+  setActiveTab: (value: OrderTab) => void;
 }) {
-  const handleSelect = (value: string) => {
+  const handleSelect = (value: OrderTab) => {
     setActiveTab(value);
   };
 
