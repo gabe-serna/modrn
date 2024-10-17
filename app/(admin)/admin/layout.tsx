@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
@@ -46,6 +47,9 @@ export default async function AdminLayout({
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
+              <SheetDescription className="sr-only">
+                Nav Bar Content
+              </SheetDescription>
               <AdminNav orders={count} screen="mobile" />
             </SheetContent>
           </Sheet>
