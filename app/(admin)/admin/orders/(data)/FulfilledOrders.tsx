@@ -3,11 +3,15 @@ import Image from "next/image";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { CartData } from "../OrderList";
 import Link from "next/link";
-import { formatDateToLocal, getShippingMessage } from "@/utils/dates";
-import { Button } from "@/components/ui/button";
-import { EllipsisVertical, ShoppingBasket } from "lucide-react";
+import {
+  formatDateToLocal,
+  getDeliveredMessage,
+  getShippingMessage,
+  getTransitMessage,
+} from "@/utils/dates";
+import { EllipsisVertical, Package, Truck } from "lucide-react";
 
-export function NewOrder({ orders }: { orders: CartData[] | null }) {
+export function FulfilledOrders({ orders }: { orders: CartData[] | null }) {
   if (!orders) {
     return (
       <Table className="size-full max-w-[1000px]">
@@ -101,11 +105,23 @@ export function NewOrder({ orders }: { orders: CartData[] | null }) {
               <TableCell className="text-bold align-baseline text-xl">
                 <div className="flex flex-col">
                   <h1 className="text-lg font-bold text-foreground">
-                    {getShippingMessage(order.created_at)}
+                    {getDeliveredMessage(order.created_at)}
                   </h1>
                   <p className="text-sm text-stone-500">
                     Ordered {formatDateToLocal(order.created_at, true)}
                   </p>
+                  <div className="mt-2 flex w-full flex-col space-y-1 rounded-lg border border-stone-800 p-3 pr-0">
+                    <div className="flex space-x-2">
+                      <Truck className="size-4 stroke-gold-700" />
+                      <p className="cursor-pointer text-xs text-stone-500 underline">
+                        {order.tracking_number}
+                      </p>
+                    </div>
+                    <p className="text-xs text-stone-600">
+                      Shipped on {formatDateToLocal(order.shipped_at, true)}{" "}
+                      <span className="font-bold underline">Print</span>
+                    </p>
+                  </div>
                   <div className="mt-4 flex flex-col space-y-1 text-xs">
                     <h2 className="sr-only">Ship to</h2>
                     <p className="font-bold text-muted-foreground">
@@ -115,9 +131,6 @@ export function NewOrder({ orders }: { orders: CartData[] | null }) {
                       {order.city}, {order.state}
                     </p>
                   </div>
-                  <Button className="mt-4 bg-gold-800 text-base font-bold tracking-wide text-foreground hover:bg-gold-700">
-                    Buy Shipping Label
-                  </Button>
                 </div>
               </TableCell>
               <TableCell className="align-baseline">
@@ -137,9 +150,9 @@ export function NewOrder({ orders }: { orders: CartData[] | null }) {
               "linear-gradient(black 0%, rgba(0,0,0,0.25) 60%, transparent 95%)",
           }}
         >
-          <ShoppingBasket className="size-24 stroke-gold-500" />
+          <Package className="size-24 stroke-gold-500" />
         </div>
-        <h1 className="text-4xl font-bold">No New Orders</h1>
+        <h1 className="text-4xl font-bold">No Fulfilled Orders</h1>
         <p className="mb-20 mt-2 font-sans italic text-muted-foreground">
           Relax, you're all caught up for now.
         </p>

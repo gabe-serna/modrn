@@ -11,7 +11,7 @@ import {
 } from "@/utils/dates";
 import { EllipsisVertical, Package, Truck } from "lucide-react";
 
-export function FulfilledOrder({ orders }: { orders: CartData[] | null }) {
+export function AllOrders({ orders }: { orders: CartData[] | null }) {
   if (!orders) {
     return (
       <Table className="size-full max-w-[1000px]">

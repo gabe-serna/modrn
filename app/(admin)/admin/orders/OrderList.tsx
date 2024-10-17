@@ -1,16 +1,11 @@
 "use client";
 import { createClient } from "@/utils/supabase/client";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { formatDateToLocal, getShippingMessage } from "@/utils/dates";
-import { EllipsisVertical } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { OrderTab } from "./page";
-import { NewOrder } from "./(data)/NewOrder";
-import { TransitOrder } from "./(data)/TransitOrder";
-import { FulfilledOrder } from "./(data)/FulfilledOrder";
+import { NewOrders } from "./(data)/NewOrders";
+import { TransitOrders } from "./(data)/TransitOrders";
+import { FulfilledOrders } from "./(data)/FulfilledOrders";
+import { AllOrders } from "./(data)/AllOrders";
 
 export interface CartData {
   id: string;
@@ -91,12 +86,12 @@ export default function OrderList({ activeTab }: { activeTab: OrderTab }) {
 
   switch (activeTab) {
     case "new":
-      return <NewOrder orders={orders} />;
+      return <NewOrders orders={orders} />;
     case "transit":
-      return <TransitOrder orders={orders} />;
+      return <TransitOrders orders={orders} />;
     case "fulfilled":
-      return <FulfilledOrder orders={orders} />;
+      return <FulfilledOrders orders={orders} />;
     case "all":
-      return <FulfilledOrder orders={orders} />;
+      return <AllOrders orders={orders} />;
   }
 }
