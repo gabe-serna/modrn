@@ -54,7 +54,7 @@ export default function OrderList() {
         <TableBody>
           {Array.from({ length: 2 }).map((_value, index) => (
             <TableRow key={index}>
-              <TableCell className="flex pb-14 pl-20 pt-9">
+              <TableCell className="flex pb-16 pl-20 pt-9">
                 <div className="flex flex-col">
                   <Skeleton className="h-5 w-44" />
                   <div className="mt-4 flex w-max space-x-4">
