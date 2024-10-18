@@ -31,7 +31,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.53.0",
-    "stripe": "^17.2.0",
+    "stripe": "^16.9.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

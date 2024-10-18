@@ -1,96 +1,72 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
-
 <p align="center">
- The fastest way to build apps with Next.js and Supabase
+<a href="#">
+  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://i.ibb.co/2yC1WsP/Screenshot-2024-10-18-082901.png">
+  </a>
+</p>
+
+  <h1 align="center">MODRN</h1>
+<p align="center">
+ <i>Explore uncompromising elegance for work and home</i>
 </p>
 
 <p align="center">
+  <a href="#what-is-modrn"><strong>About</strong></a> ·
   <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
+  <a href="#screenshots"><strong>Screenshots</strong></a>
+  
 </p>
 <br/>
 
+## What is MODRN?
+
+MODRN is a luxury e-commerce site that offers extravagant versions of everyday items that offer **no extra utility**. You can browse the site, add items to your cart, and checkout.
+
+This app is built with Next.js, Supabase, and Stripe. I used this project as a way for me to learn how to use these technologies together.
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/2560px-Nextjs-logo.svg.png" alt="next js logo" height="25">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://docs.comnoco.com/img/docs/supabase/supabase-logo-wordmark--dark.png" alt="next js logo" height="30">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://hostbillapp.com/appstore/payment_stripe/images/thumbnails/m_logo.png" alt="next js logo" height="30">
+</p>
+
 ## Features
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Middleware
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+- Browse a catalog of 24 useless luxury items that offer no extra utility
+- Add items to your cart and checkout
+- Sign up and log in to your account to view your orders
+- Admin Panel
+  - Fulfill orders and update shipment status
+  - View all products and filter by category, search by name, and sort by label
 
-## Demo
+## Screenshots
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+You can interact with a fully working demo at [domain](https://demo-nextjs-with-supabase.vercel.app/).
 
-## Deploy to Vercel
+<p align="center">
+  <a href="https://ibb.co/gZwT78V"><img src="https://i.ibb.co/ZzK8Jrm/Screenshot-2024-10-18-085706.png" alt="Screenshot-2024-10-18-085706" border="0"></a><p align="center"><i>Homepage</i></p></p>
+<br/> <br/>
 
-Vercel deployment will guide you through creating a Supabase account and project.
+<p align="center"><a href="https://ibb.co/Z26L4H8"><img src="https://i.ibb.co/tLMmjZs/Screenshot-2024-10-18-085738.png" alt="Screenshot-2024-10-18-085738" border="0"></a><p align="center"><i>Decor Items</i></p></p>
+<br/> <br/>
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+<p align="center"><a href="https://ibb.co/vwYJjzb"><img src="https://i.ibb.co/j6RLr4d/Screenshot-2024-10-18-085803.png" alt="Screenshot-2024-10-18-085803" border="0"></a><p align="center"><i>Office Items</i></p></p>
+<br/> <br/>
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+<p align="center"><a href="https://ibb.co/sm0m5g9"><img src="https://i.ibb.co/qyty0DY/Screenshot-2024-10-18-085828.png" alt="Screenshot-2024-10-18-085828" border="0"></a><p align="center"><i>Product Page</i></p></p>
+<br/> <br/>
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+<p align="center"><a href="https://ibb.co/2Sr2KNL"><img src="https://i.ibb.co/9h0XYtf/Screenshot-2024-10-18-085903.png" alt="Screenshot-2024-10-18-085903" border="0"></a><p align="center"><i>Cart Page</i></p></p>
+<br/> <br/>
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+<p align="center"><a href="https://ibb.co/QCZtvNQ"><img src="https://i.ibb.co/5ndwh84/Screenshot-2024-10-18-090623.png" alt="Screenshot-2024-10-18-090623" border="0"></a><p align="center"><i>Stripe Checkout</i></p></p>
+<br/> <br/>
 
-## Clone and run locally
+<p align="center"><a href="https://imgbb.com/"><img src="https://i.ibb.co/Bs8DK4K/Screenshot-2024-10-18-090655.png" alt="Screenshot-2024-10-18-090655" border="0"></a><p align="center"><i>Sign in Page</i></p></p>
+<br/> <br/>
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+<p align="center"><a href="https://ibb.co/jMjN9v0"><img src="https://i.ibb.co/J7S1WR6/Screenshot-2024-10-18-090744.png" alt="Screenshot-2024-10-18-090744" border="0"></a><p align="center"><i>Admin Panel: Orders</i></p></p>
+<br/> <br/>
 
-2. Create a Next.js app using the Supabase Starter template npx command
-
-   ```bash
-   npx create-next-app -e with-supabase
-   ```
-
-3. Use `cd` to change into the app's directory
-
-   ```bash
-   cd name-of-new-app
-   ```
-
-4. Rename `.env.example` to `.env.local` and update the following:
-
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-   ```
-
-   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
-
-5. You can now run the Next.js local development server:
-
-   ```bash
-   npm run dev
-   ```
-
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
-
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
-
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
-
-## Feedback and issues
-
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
-
-## More Supabase examples
-
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+<p align="center"><a href="https://ibb.co/PCrHRgy"><img src="https://i.ibb.co/nkwJTjy/Screenshot-2024-10-18-090811.png" alt="Screenshot-2024-10-18-090811" border="0"></a><p align="center"><i>Admin Panel: Inventory</i></p></p>
