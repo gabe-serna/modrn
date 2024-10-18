@@ -109,7 +109,7 @@ export default function FulfilledOrders({
               <TableCell className="text-bold align-baseline text-xl">
                 <div className="flex flex-col">
                   <h1 className="text-lg font-bold text-foreground">
-                    {getDeliveredMessage(order.created_at)}
+                    {getDeliveredMessage(order.delivered_at)}
                   </h1>
                   <p className="text-sm text-stone-500">
                     Ordered {formatDateToLocal(order.created_at, true)}

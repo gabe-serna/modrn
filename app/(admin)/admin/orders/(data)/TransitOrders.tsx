@@ -9,6 +9,7 @@ import {
   getTransitMessage,
 } from "@/utils/dates";
 import { EllipsisVertical, Truck } from "lucide-react";
+import StatusButton from "./StatusButton";
 
 export default function TransitOrders({
   orders,
@@ -108,7 +109,9 @@ export default function TransitOrders({
               <TableCell className="text-bold align-baseline text-xl">
                 <div className="flex flex-col">
                   <h1 className="text-lg font-bold text-foreground">
-                    {getTransitMessage(order.shipped_at)}
+                    {order.shipment_status === "PRE_TRANSIT"
+                      ? "Pre-Transit"
+                      : "In Transit"}
                   </h1>
                   <p className="text-sm text-stone-500">
                     Ordered {formatDateToLocal(order.created_at, true)}
@@ -125,14 +128,17 @@ export default function TransitOrders({
                       <span className="font-bold underline">Print</span>
                     </p>
                   </div>
-                  <div className="mt-4 flex flex-col space-y-1 text-xs">
-                    <h2 className="sr-only">Ship to</h2>
-                    <p className="font-bold text-muted-foreground">
-                      {order.ship_to}
-                    </p>
-                    <p className="text-muted-foreground">
-                      {order.city}, {order.state}
-                    </p>
+                  <div className="mt-4 flex items-start space-x-6">
+                    <div className="flex flex-col space-y-1 text-xs">
+                      <h2 className="sr-only">Ship to</h2>
+                      <p className="font-bold text-muted-foreground">
+                        {order.ship_to}
+                      </p>
+                      <p className="text-muted-foreground">
+                        {order.city}, {order.state}
+                      </p>
+                    </div>
+                    <StatusButton order={order} />
                   </div>
                 </div>
               </TableCell>

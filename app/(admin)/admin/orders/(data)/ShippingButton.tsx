@@ -12,10 +12,8 @@ import {
 import { CartData } from "../OrderList";
 import { createClient } from "@/utils/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
 
 export default function ShippingButton({ order }: { order: CartData }) {
-  const router = useRouter();
   function generateRandomNumber() {
     const length = 13;
     const randomPart = Math.floor(Math.random() * Math.pow(10, length - 1));

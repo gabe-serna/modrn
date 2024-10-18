@@ -43,15 +43,6 @@ export default function AdminNav({ orders, screen }: Props) {
         />
       ),
     },
-    {
-      href: "/admin/customers",
-      label: "Customers",
-      icon: (
-        <Users
-          className={"/admin/customers" === pathname ? activeStyle : baseStyle}
-        />
-      ),
-    },
   ];
   if (isDesktop)
     return (
