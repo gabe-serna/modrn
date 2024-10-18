@@ -20,8 +20,20 @@ export default function OrderList({ activeTab }: { activeTab: OrderTab }) {
           filter = "UNKNOWN";
           break;
         case "transit":
-          filter = "TRANSIT";
-          break;
+          const { data, error: err } = await supabase
+            .from("orders")
+            .select(
+              "*, order_items(id, quantity, products(id, name, image_url, total_stock))",
+            )
+            .or("shipment_status.eq.TRANSIT,shipment_status.eq.PRE_TRANSIT")
+            .order("created_at", { ascending: true })
+            .returns<CartData[]>();
+          if (err) {
+            console.error(err);
+            return;
+          }
+          setOrders(data);
+          return;
         case "fulfilled":
           filter = "DELIVERED";
           break;
@@ -29,7 +41,9 @@ export default function OrderList({ activeTab }: { activeTab: OrderTab }) {
 
       const { data, error: err } = await supabase
         .from("orders")
-        .select("*, order_items(id, quantity, products(name, image_url))")
+        .select(
+          "*, order_items(id, quantity, products(id, name, image_url, total_stock))",
+        )
         .eq("shipment_status", filter)
         .order("created_at", { ascending: true })
         .returns<CartData[]>();
@@ -75,8 +89,10 @@ export interface CartData {
     id: string;
     quantity: number;
     products: {
+      id: number;
       name: string;
       image_url: string;
+      total_stock: number;
     };
   }[];
 }

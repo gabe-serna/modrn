@@ -108,7 +108,7 @@ export default function TransitOrders({
               <TableCell className="text-bold align-baseline text-xl">
                 <div className="flex flex-col">
                   <h1 className="text-lg font-bold text-foreground">
-                    {getTransitMessage(order.created_at)}
+                    {getTransitMessage(order.shipped_at)}
                   </h1>
                   <p className="text-sm text-stone-500">
                     Ordered {formatDateToLocal(order.created_at, true)}

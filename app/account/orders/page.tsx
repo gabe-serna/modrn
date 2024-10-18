@@ -47,6 +47,7 @@ export default async function Orders() {
       "id, created_at, total:amount_total, order_status, shipment_status, order_items(id, quantity, products(name, image_url))",
     )
     .eq("user_id", user.id)
+    .order("created_at", { ascending: false })
     .returns<CartData[]>();
   if (err) {
     console.error(err);
@@ -119,7 +120,9 @@ export default async function Orders() {
                   {item.total / 100}
                 </TableCell>
                 <TableCell className="text-bold align-baseline text-lg font-bold tracking-wide text-stone-500">
-                  {item.order_status}
+                  {item.shipment_status === "UNKNOWN"
+                    ? item.order_status
+                    : item.shipment_status}
                 </TableCell>
                 <TableCell className="pt-[1.275rem] align-top">
                   <ChevronRight className="cursor-pointer stroke-foreground transition-colors hover:stroke-muted-foreground" />

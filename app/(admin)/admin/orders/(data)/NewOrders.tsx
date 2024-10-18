@@ -6,6 +6,7 @@ import Link from "next/link";
 import { formatDateToLocal, getShippingMessage } from "@/utils/dates";
 import { Button } from "@/components/ui/button";
 import { EllipsisVertical, ShoppingBasket } from "lucide-react";
+import ShippingButton from "./ShippingButton";
 
 export default function NewOrders({ orders }: { orders: CartData[] | null }) {
   if (!orders) {
@@ -115,9 +116,7 @@ export default function NewOrders({ orders }: { orders: CartData[] | null }) {
                       {order.city}, {order.state}
                     </p>
                   </div>
-                  <Button className="mt-4 bg-gold-800 text-base font-bold tracking-wide text-foreground hover:bg-gold-700">
-                    Buy Shipping Label
-                  </Button>
+                  <ShippingButton order={order} />
                 </div>
               </TableCell>
               <TableCell className="align-baseline">
