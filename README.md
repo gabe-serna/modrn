@@ -1,5 +1,5 @@
 <p align="center">
-<a href="#">
+<a href="https://modrn.vercel.app/">
   <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://i.ibb.co/2yC1WsP/Screenshot-2024-10-18-082901.png">
   </a>
 </p>
@@ -42,7 +42,7 @@ This app is built with Next.js, Supabase, and Stripe. I used this project as a w
 
 ## Screenshots
 
-You can interact with a fully working demo at [domain](https://demo-nextjs-with-supabase.vercel.app/).
+You can interact with a fully working demo at [modrn.vercel.app](https://modrn.vercel.app/).
 
 <p align="center">
   <a href="https://ibb.co/gZwT78V"><img src="https://i.ibb.co/ZzK8Jrm/Screenshot-2024-10-18-085706.png" alt="Screenshot-2024-10-18-085706" border="0"></a><p align="center"><i>Homepage</i></p></p>
@@ -70,3 +70,7 @@ You can interact with a fully working demo at [domain](https://demo-nextjs-with-
 <br/> <br/>
 
 <p align="center"><a href="https://ibb.co/PCrHRgy"><img src="https://i.ibb.co/nkwJTjy/Screenshot-2024-10-18-090811.png" alt="Screenshot-2024-10-18-090811" border="0"></a><p align="center"><i>Admin Panel: Inventory</i></p></p>
+<br/> <br/>
+
+<p align="center">
+  <a href="#what-is-modrn"><strong>Back to Top</strong></a>
