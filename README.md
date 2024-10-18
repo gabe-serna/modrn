@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://modrn.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://i.ibb.co/2yC1WsP/Screenshot-2024-10-18-082901.png">
+  <img alt="Modern landing page screenshot" src="https://i.ibb.co/2yC1WsP/Screenshot-2024-10-18-082901.png">
   </a>
 </p>
 
@@ -24,11 +24,11 @@ MODRN is a luxury e-commerce site that offers extravagant versions of everyday i
 This app is built with Next.js, Supabase, and Stripe. I used this project as a way for me to learn how to use these technologies together.
 
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/2560px-Nextjs-logo.svg.png" alt="next js logo" height="25">
+  <img src="https://images-cdn.openxcell.com/wp-content/uploads/2024/07/24154156/dango-inner-2.webp" alt="next js logo" height="80">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://docs.comnoco.com/img/docs/supabase/supabase-logo-wordmark--dark.png" alt="next js logo" height="30">
+  <img src="https://seeklogo.com/images/S/supabase-logo-DCC676FFE2-seeklogo.com.png" alt="next js logo" height="75">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://hostbillapp.com/appstore/payment_stripe/images/thumbnails/m_logo.png" alt="next js logo" height="30">
+  <img src="https://cdn.icon-icons.com/icons2/2407/PNG/512/stripe_icon_146092.png" alt="next js logo" height="80">
 </p>
 
 ## Features
